@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jen Deepa - Product Leader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #2a2a2a;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 182, 193, 0.03), transparent 70%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #d4a5a5;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 400;
+            font-style: italic;
+            color: #d4a5a5;
+            margin-bottom: 3rem;
+        }
+
+        .hero-bio {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #b8b8b8;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #d4a5a5;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+        }
+
+        .nav-item {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #999;
+            background: #1a1a1a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-right: 1px solid #333;
+        }
+
+        .nav-item:last-child {
+            border-right: none;
+        }
+
+        .nav-item:hover {
+            background: #2a2a2a;
+            color: #d4a5a5;
+        }
+
+        /* Section Base */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 4rem;
+            width: 100%;
+        }
+
+        /* Industries Section */
+        .industries-section {
+            background: #faf8f6;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: #2a2a2a;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #c49a9a;
+        }
+
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            margin-top: 4rem;
+        }
+
+        .industry-box {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #ececec;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .industry-box:hover {
+            background: #2a2a2a;
+            color: #fff;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .industry-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .industry-name {
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+
+        /* Strengths Section */
+        .strengths-section {
+            background: linear-gradient(135deg, #e8d5d5 0%, #f5e8e8 100%);
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .strength-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 3.5rem;
+            border: 1px solid rgba(212, 165, 165, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .strength-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .strength-emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .strength-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+            font-weight: 300;
+        }
+
+        /* Accomplishments Section */
+        .accomplishments-section {
+            background: #0a0a0a;
+        }
+
+        .accomplishments-section .section-title,
+        .accomplishments-section .section-subtitle {
+            color: #fff;
+        }
+
+        .accomplishments-section .section-label {
+            color: #666;
+        }
+
+        .accomplishments-section .section-subtitle {
+            color: #d4a5a5;
+        }
+
+        .accomplishments-list {
+            margin-top: 5rem;
+        }
+
+        .accomplishment-item {
+            border-bottom: 1px solid #333;
+            padding: 3rem 0;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 4rem;
+            transition: all 0.3s ease;
+        }
+
+        .accomplishment-item:hover {
+            border-bottom-color: #d4a5a5;
+            padding-left: 2rem;
+        }
+
+        .accomplishment-category {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #d4a5a5;
+        }
+
+        .accomplishment-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c8c8c8;
+            font-weight: 300;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, #f5e8e8 0%, #faf8f6 100%);
+            padding: 10rem 4rem;
+            text-align: center;
+        }
+
+        .quote-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4.5vw, 3.8rem);
+            line-height: 1.5;
+            font-weight: 300;
+            font-style: italic;
+            color: #2a2a2a;
+        }
+
+        .quote-mark {
+            font-size: 8rem;
+            color: #e8d5d5;
+            line-height: 0;
+            margin-bottom: 2rem;
+        }
+
+        /* Passions Section */
+        .passions-section {
+            background: #fff;
+        }
+
+        .passions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 4rem;
+        }
+
+        .passion-card {
+            padding: 3rem 2rem;
+            border: 1px solid #ececec;
+            text-align: center;
+            transition: all 0.4s ease;
+            background: #fff;
+        }
+
+        .passion-card:hover {
+            background: #faf8f6;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.06);
+            z-index: 10;
+        }
+
+        .passion-emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .passion-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
+
+        .passion-text {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .passion-badge {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.4rem 1.2rem;
+            background: #2a2a2a;
+            color: #fff;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: #0a0a0a;
+            padding: 10rem 4rem;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1rem;
+            color: #999;
+            margin-bottom: 4rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 1.3rem 3.5rem;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid #d4a5a5;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #d4a5a5;
+            color: #0a0a0a;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .industries-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .strengths-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .passions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .accomplishment-item {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .nav-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-item {
+                border-bottom: 1px solid #333;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-container {
+                padding: 4rem 2rem;
+            }
+
+            .industries-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .passions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-section {
+                padding: 6rem 2rem;
+            }
+
+            .contact-section {
+                padding: 6rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Product Leader</div>
+            <h1 class="hero-name">JEN DEEPA</h1>
+            <p class="hero-title">Crafting Excellence Through Collaboration</p>
+            <p class="hero-bio">Building environments where talented people thrive, collaborate, and achieve their professional goals while delivering exceptional products that create lasting impact.</p>
+            <div class="hero-location">📍 Golden, Colorado</div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="nav-bar">
+        <div class="nav-item">Industries</div>
+        <div class="nav-item">Strengths</div>
+        <div class="nav-item">Accomplishments</div>
+        <div class="nav-item">Passions</div>
+    </div>
+
+    <!-- Industries Section -->
+    <section class="section industries-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Expertise Across</div>
+                <h2 class="section-title">Industries</h2>
+                <p class="section-subtitle">Cross-functional domain knowledge</p>
+            </div>
+            
+            <div class="industries-grid">
+                <div class="industry-box">
+                    <div class="industry-emoji">✈️</div>
+                    <div class="industry-name">Airline</div>
+                </div>
+                <div class="industry-box">
+                    <div class="industry-emoji">🛫</div>
+                    <div class="industry-name">Aviation</div>
+                </div>
+                <div class="industry-box">
+                    <div class="industry-emoji">🏥</div>
+                    <div class="industry-name">Healthcare</div>
+                </div>
+                <div class="industry-box">
+                    <div class="industry-emoji">🩺</div>
+                    <div class="industry-name">Health Insurance</div>
+                </div>
+                <div class="industry-box">
+                    <div class="industry-emoji">💻</div>
+                    <div class="industry-name">Technology</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strengths Section -->
+    <section class="section strengths-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Leadership Philosophy</div>
+                <h2 class="section-title">Core Strengths</h2>
+                <p class="section-subtitle">Built on four guiding principles</p>
+            </div>
+            
+            <div class="strengths-grid">
+                <div class="strength-card">
+                    <span class="strength-emoji">🎯</span>
+                    <p class="strength-text">Create a high talent density team that brings together diverse skills and perspectives</p>
+                </div>
+                <div class="strength-card">
+                    <span class="strength-emoji">⚙️</span>
+                    <p class="strength-text">Establish clear processes that enable teams to work efficiently and effectively</p>
+                </div>
+                <div class="strength-card">
+                    <span class="strength-emoji">🌱</span>
+                    <p class="strength-text">Foster an environment where people enjoy working together and can do their best work</p>
+                </div>
+                <div class="strength-card">
+                    <span class="strength-emoji">🚀</span>
+                    <p class="strength-text">Help team members thrive and meet their professional goals while delivering impact</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accomplishments Section -->
+    <section class="section accomplishments-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Impact & Delivery</div>
+                <h2 class="section-title">Key Accomplishments</h2>
+                <p class="section-subtitle">Products & solutions that matter</p>
+            </div>
+            
+            <div class="accomplishments-list">
+                <div class="accomplishment-item">
+                    <div class="accomplishment-category">Healthcare Innovation</div>
+                    <div class="accomplishment-text">Collaborated with a Nephrologist to understand patient data needs and built a comprehensive Tableau dashboard, empowering doctors to take timely, appropriate actions for their patients.</div>
+                </div>
+                
+                <div class="accomplishment-item">
+                    <div class="accomplishment-category">Aviation Technology</div>
+                    <div class="accomplishment-text">Led requirements gathering, use case development, and user testing for the FlightChat App, improving commercial flight communication capabilities for crews and operations teams.</div>
+                </div>
+                
+                <div class="accomplishment-item">
+                    <div class="accomplishment-category">Customer Experience</div>
+                    <div class="accomplishment-text">Built comprehensive roadmap and backlog to modernize and streamline check-in processes at Alaska Airlines, creating a testing process that met revenue upsell goals while improving customer satisfaction.</div>
+                </div>
+                
+                <div class="accomplishment-item">
+                    <div class="accomplishment-category">NPS Improvement</div>
+                    <div class="accomplishment-text">Drove initiatives that significantly improved Alaska Airlines' Net Promoter Score, enhancing customer loyalty and satisfaction across touchpoints.</div>
+                </div>
+                
+                <div class="accomplishment-item">
+                    <div class="accomplishment-category">Digital Transformation</div>
+                    <div class="accomplishment-text">Implemented Document Verification solution for Alaska Airlines, enabling travelers to digitally verify their documents and reducing friction in the travel experience.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-content">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">My mission is to create the conditions where talented people can collaborate, grow, and deliver their best work.</p>
+        </div>
+    </section>
+
+    <!-- Passions Section -->
+    <section class="section passions-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Life Beyond Work</div>
+                <h2 class="section-title">Passions & Pursuits</h2>
+                <p class="section-subtitle">What brings joy and growth</p>
+            </div>
+            
+            <div class="passions-grid">
+                <div class="passion-card">
+                    <span class="passion-emoji">🤖</span>
+                    <h3 class="passion-title">AI Innovation</h3>
+                    <p class="passion-text">Enhancing knowledge on agentic workflows and LLMs for product functions.</p>
+                </div>
+                
+                <div class="passion-card">
+                    <span class="passion-emoji">🎸</span>
+                    <h3 class="passion-title">Guitar Journey</h3>
+                    <p class="passion-text">2026 goal: master "Losing My Religion" by REM.</p>
+                </div>
+                
+                <div class="passion-card">
+                    <span class="passion-emoji">🥾</span>
+                    <h3 class="passion-title">Hiking</h3>
+                    <p class="passion-text">8 to 12 mile adventures exploring nature's beauty.</p>
+                </div>
+                
+                <div class="passion-card">
+                    <span class="passion-emoji">🎲</span>
+                    <h3 class="passion-title">Board Games</h3>
+                    <p class="passion-text">Competitive player who thrives on strategy and victory.</p>
+                </div>
+                
+                <div class="passion-card">
+                    <span class="passion-emoji">✈️</span>
+                    <h3 class="passion-title">World Traveler</h3>
+                    <p class="passion-text">Recent: Malta, Vancouver, Whistler, Colombia. Next: Montenegro, Indonesia.</p>
+                </div>
+                
+                <div class="passion-card">
+                    <span class="passion-emoji">📚</span>
+                    <h3 class="passion-title">Avid Reader</h3>
+                    <p class="passion-text">Currently reading <em>The Culture Code</em> and <em>The Mom Test</em>.</p>
+                </div>
+                
+                <div class="passion-card">
+                    <span class="passion-emoji">🏡</span>
+                    <h3 class="passion-title">Real Estate</h3>
+                    <p class="passion-text">Building wealth through strategic investments.</p>
+                </div>
+                
+                <div class="passion-card">
+                    <span class="passion-emoji">🏆</span>
+                    <h3 class="passion-title">Spelling Champion</h3>
+                    <p class="passion-text">Undisputed adult spelling bee champion.</p>
+                    <span class="passion-badge">Reigning</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2 class="contact-title">Let's Connect</h2>
+        <p class="contact-subtitle">Ready to collaborate on something extraordinary</p>
+        <div class="contact-buttons">
+            <a href="mailto:jenniferdeepa@gmail.com" class="contact-btn">Get in Touch</a>
+            <a href="https://www.linkedin.com/in/jendeepa" class="contact-btn" target="_blank">LinkedIn Profile</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2026 Jen Deepa. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
