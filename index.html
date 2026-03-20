@@ -85,6 +85,22 @@
             font-weight: 300;
         }
 
+        .hero-superpower {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: rgba(212, 165, 165, 0.1);
+            border-left: 3px solid #d4a5a5;
+        }
+
+        .hero-superpower p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #e8d5d5;
+            font-style: italic;
+        }
+
         .hero-location {
             display: inline-flex;
             align-items: center;
@@ -214,6 +230,103 @@
         .strengths-section {
             background: linear-gradient(135deg, #e8d5d5 0%, #f5e8e8 100%);
         }
+
+        /* Experience Section */
+        .experience-section {
+            background: #fff;
+        }
+
+        .experience-content {
+            margin-top: 4rem;
+        }
+
+        .experience-role {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .experience-approach {
+            background: linear-gradient(135deg, #f5e8e8 0%, #faf8f6 100%);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-left: 3px solid #d4a5a5;
+        }
+
+        .experience-approach p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #2a2a2a;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .experience-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #ececec;
+        }
+
+        .experience-industry {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #d4a5a5;
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #2a2a2a;
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-description {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #4a4a4a;
+            font-weight: 300;
+        }
+
+        .experience-achievements {
+            margin-top: 3rem;
+        }
+
+        .achievements-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #2a2a2a;
+            margin-bottom: 2rem;
+        }
+
+        .achievements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievements-list li {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+            font-weight: 300;
+            padding-left: 2rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .achievements-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #d4a5a5;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        /* Strengths Section */
 
         .strengths-grid {
             display: grid;
@@ -386,6 +499,63 @@
             text-transform: uppercase;
         }
 
+        /* About Me Section */
+        .about-section {
+            background: linear-gradient(135deg, #faf8f6 0%, #f5e8e8 100%);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 4rem auto 0;
+        }
+
+        .about-image-container {
+            width: 100%;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .about-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ececec;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .about-story {
+            margin-bottom: 4rem;
+        }
+
+        .about-paragraph {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #4a4a4a;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .about-family {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-left: 3px solid #d4a5a5;
+        }
+
+        .about-family-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #2a2a2a;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-family-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #4a4a4a;
+            font-weight: 300;
+        }
+
         /* Contact Section */
         .contact-section {
             background: #0a0a0a;
@@ -511,6 +681,9 @@
             <h1 class="hero-name">JEN DEEPA</h1>
             <p class="hero-title">Crafting Excellence Through Collaboration</p>
             <p class="hero-bio">Building environments where talented people thrive, collaborate, and achieve their professional goals while delivering exceptional products that create lasting impact.</p>
+            <div class="hero-superpower">
+                <p>My superpower: Asking the right questions to bring clarity to ambiguity—diving deep into the problems businesses face, then bringing the vision and right requirements to the broader team for execution and iteration.</p>
+            </div>
             <div class="hero-location">📍 Golden, Colorado</div>
         </div>
     </section>
@@ -518,9 +691,9 @@
     <!-- Navigation -->
     <div class="nav-bar">
         <div class="nav-item">Industries</div>
+        <div class="nav-item">Experience</div>
         <div class="nav-item">Strengths</div>
         <div class="nav-item">Accomplishments</div>
-        <div class="nav-item">Passions</div>
     </div>
 
     <!-- Industries Section -->
@@ -552,6 +725,50 @@
                 <div class="industry-box">
                     <div class="industry-emoji">💻</div>
                     <div class="industry-name">Technology</div>
+                </div>
+                <div class="industry-box">
+                    <div class="industry-emoji">🛒</div>
+                    <div class="industry-name">E-commerce</div>
+                </div>
+                <div class="industry-box">
+                    <div class="industry-emoji">🏪</div>
+                    <div class="industry-name">Online Marketplace</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Professional Journey</div>
+                <h2 class="section-title">Experience</h2>
+                <p class="section-subtitle">Building products that matter</p>
+            </div>
+            
+            <div class="experience-content">
+                <div class="experience-role">
+                    <div class="experience-approach">
+                        <p>By asking the right questions and bringing clarity to ambiguity, I dive deep into the problems businesses face—then translate those insights into clear vision and actionable requirements for the broader team for execution and iteration.</p>
+                    </div>
+                    
+                    <div class="experience-header">
+                        <div class="experience-industry">✈️ Airline</div>
+                        <h3 class="experience-title">Senior Product Manager</h3>
+                        <p class="experience-description">Own end-to-end product strategy and roadmap across mobile and web platforms. Define value propositions, lead go-to-market execution, and drive product lifecycle management for digital products spanning e-commerce, regulatory compliance, and third-party integrations. Lead cross-functional teams (design, engineering, analytics, operations, legal) to launch and scale platform capabilities.</p>
+                    </div>
+                    
+                    <div class="experience-achievements">
+                        <h4 class="achievements-label">Key Achievements</h4>
+                        <ul class="achievements-list">
+                            <li>Conducted discovery and user testing to uncover all use cases — including 207 passport nationalities, traveling with pets, and minors — ensuring the Document Verification experience accounted for all edge cases with completion in less than 2 minutes on iOS, Android, and web</li>
+                            <li>Led Product Growth strategy for Alaska Airlines' modernized check-in platform, retiring legacy architecture and driving 87% digital self-service adoption while generating $2M/month in new e-commerce revenue through ancillary products (bags, seat upgrades, priority boarding)</li>
+                            <li>Developed and executed end-to-end product roadmap, delivering MVP within 3 months with comprehensive go-to-market and testing plans, and authored a multi-year product strategy to expand platform scalability for international routes</li>
+                            <li>Built performance dashboards and data-driven feedback loops, improving conversion rates through A/B testing and experimentation while leveraging AI to automate PRD and Creative Brief generation</li>
+                            <li>Co-led development of Carrier Connect marketplace platform enabling cross-app discovery for Alaska and Oneworld partners, defining value proposition and expanding platform scalability to create new customer acquisition channels</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -695,19 +912,46 @@
         </div>
     </section>
 
+    <!-- About Me Section -->
+    <section class="section about-section">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Personal Journey</div>
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Building bridges across cultures and experiences</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image-container">
+                    <img src="IMG_5558.jpeg" alt="Jen Deepa with family" class="about-image">
+                </div>
+                
+                <div class="about-story">
+                    <p class="about-paragraph">I immigrated to the United States as a teenager, building a life and career with determination and resilience, navigating new systems and opportunities largely without guidance. This experience shaped my approach to problem-solving and my deep empathy for diverse user needs.</p>
+                    
+                    <p class="about-paragraph">My multicultural background enriches my product perspective—I speak four languages fluently: English, Hindi, Tamil, and Klingon. This linguistic diversity has been invaluable in understanding global markets and building products for diverse audiences.</p>
+                    
+                    <p class="about-paragraph">I've had the privilege of traveling to 34 countries, immersing myself in different cultures, connecting with people from all walks of life, and experiencing diverse landscapes. These journeys continuously inform how I think about user experience, accessibility, and inclusive product design.</p>
+                </div>
+                
+                <div class="about-family">
+                    <h3 class="about-family-title">Life in Colorado</h3>
+                    <p class="about-family-text">Today, I live in Golden, Colorado with my partner and two children. As a family, we cherish simple joys—cooking together, competitive board game nights, spelling bee challenges, and impromptu dance parties in the living room. These moments remind me what truly matters: connection, laughter, and creating memories together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact-section">
         <h2 class="contact-title">Let's Connect</h2>
         <p class="contact-subtitle">Ready to collaborate on something extraordinary</p>
         <div class="contact-buttons">
-            <a href="mailto:jenniferdeepa@gmail.com" class="contact-btn">Get in Touch</a>
+            <a href="/cdn-cgi/l/email-protection#b6dcd3d8d8dfd0d3c4d2d3d3c6d7f6d1dbd7dfda98d5d9db" class="contact-btn">Get in Touch</a>
             <a href="https://www.linkedin.com/in/jendeepa" class="contact-btn" target="_blank">LinkedIn Profile</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p class="footer-text">© 2026 Jen Deepa. All Rights Reserved.</p>
-    </footer>
-</body>
-</html>
+        <p class="footer-text">© 2026 Jen Deepa. All Righ
