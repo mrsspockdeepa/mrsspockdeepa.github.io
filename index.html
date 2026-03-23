@@ -27,7 +27,11 @@
   --sans: 'DM Sans', -apple-system, sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
 
 body {
   background: var(--bg);
@@ -36,6 +40,8 @@ body {
   font-size: 16px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  -webkit-transform: translateZ(0);
+  overflow-x: hidden;
 }
 
 a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
@@ -44,10 +50,13 @@ a:hover { opacity: 0.8; }
 /* ---- NAV ---- */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(253, 245, 245, 0.85);
-  backdrop-filter: blur(20px);
+  background: rgba(253, 245, 245, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  transition: background 0.3s;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
 }
 .nav-inner {
   max-width: 1100px; margin: 0 auto;
@@ -316,7 +325,7 @@ footer {
   .nav-logo { text-align: center; }
   .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
   .nav-links a { font-size: 0.75rem; }
-  .hero { padding-top: 110px; }
+  .hero { padding-top: 140px; }
   .hero h1 { font-size: 2.6rem; }
   .hero-meta { flex-direction: column; gap: 20px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -326,6 +335,23 @@ footer {
   .volunteer-grid { grid-template-columns: 1fr; }
   .project-metrics { flex-direction: column; gap: 16px; }
   .section-title { font-size: 2rem; }
+
+  /* Simplify animations on mobile for smoother scrolling */
+  .fade-up, .slide-left, .slide-right, .scale-in {
+    transform: none !important;
+    transition: opacity 0.5s ease !important;
+  }
+  .fade-up.visible, .slide-left.visible, .slide-right.visible, .scale-in.visible {
+    opacity: 1 !important;
+  }
+  .project-card:hover,
+  .skill-item:hover,
+  .edu-card:hover,
+  .beyond-item:hover,
+  .volunteer-card:hover,
+  .side-project-card:hover {
+    transform: none !important;
+  }
 }
 @media (max-width: 480px) {
   .nav-links { gap: 10px; }
