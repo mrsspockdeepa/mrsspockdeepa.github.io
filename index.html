@@ -309,9 +309,14 @@ footer {
 /* ---- RESPONSIVE ---- */
 @media (max-width: 768px) {
   section { padding: 72px 20px; }
-  .nav-inner { padding: 14px 20px; }
-  .nav-links { gap: 18px; }
+  .nav-inner {
+    padding: 14px 20px;
+    flex-direction: column; gap: 8px; align-items: center;
+  }
+  .nav-logo { text-align: center; }
+  .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
   .nav-links a { font-size: 0.75rem; }
+  .hero { padding-top: 110px; }
   .hero h1 { font-size: 2.6rem; }
   .hero-meta { flex-direction: column; gap: 20px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -323,7 +328,8 @@ footer {
   .section-title { font-size: 2rem; }
 }
 @media (max-width: 480px) {
-  .nav-links { gap: 12px; }
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 0.7rem; }
   .hero h1 { font-size: 2rem; }
 }
 
