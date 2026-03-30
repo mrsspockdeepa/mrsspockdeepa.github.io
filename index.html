@@ -161,6 +161,16 @@ section { padding: 100px 32px; }
 .about-detail-item:first-child { border-top: 1px solid var(--border); }
 .about-detail-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
 .about-detail-value { font-size: 0.95rem; font-weight: 400; }
+.value-list {
+  list-style: none; margin: 0; padding: 0;
+}
+.value-list li {
+  position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 0.95rem;
+}
+.value-list li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 1px; background: var(--accent);
+}
 .about-detail-value .tag {
   display: inline-block; padding: 4px 12px; margin: 3px 4px 3px 0;
   background: rgba(242,196,204,0.3); border-radius: 4px; font-size: 0.82rem;
@@ -496,8 +506,8 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
     <a href="#" class="nav-logo">Jen Deepa</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#volunteering">Community</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -543,13 +553,19 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
         <p>My superpower is asking the right questions until alignment emerges. I dive deep into the problems businesses face, understand the needs of internal and external users, then bring clear vision and actionable requirements to the team for execution and iteration.</p>
         <p>At Alaska Airlines, I lead the international travel experience product portfolio&mdash;a platform spanning iOS, Android, and Web that integrates AI-powered document verification, passport capture, and modernized check-in for millions of guests across two airline brands. Before that, I built digital aviation SaaS at Boeing/Jeppesen, launched Spectrum Mobile at Charter Communications through Slalom, and drove a 17% enrollment increase at Aetna through digital redesign.</p>
         <blockquote>&ldquo;I thrive on ownership, bringing clarity to ambiguity, and creating environments where talented people can do their best work.&rdquo;</blockquote>
-        <p>I immigrated to the United States as a teenager, building a career with determination and resilience. My multicultural background&mdash;I speak English, Hindi, and Tamil fluently&mdash;enriches how I think about user experience, accessibility, and inclusive product design. I've traveled to 34 countries and counting&mdash;it's why I'm able to connect with people from all walks of life and bring that empathy into every product I build.</p>
+        <p>I immigrated to the United States as a teenager, building a career with determination and resilience. My multicultural background, speaking English, Hindi, and Tamil fluently, enriches how I think about user experience, accessibility, and inclusive product design. I've traveled to 34 countries and counting. It's allowed me to connect with people from all walks of life and shapes how I build products with inclusive design in mind.</p>
       </div>
       <div class="about-details">
         <div class="about-detail-item">
           <div class="about-detail-label">What I value</div>
           <div class="about-detail-value">
-            End-to-end ownership &middot; High talent density teams &middot; Cross-functional partnership &middot; Data-driven decisions &middot; Translating requirements &rarr; solving business &amp; user problems
+            <ul class="value-list">
+              <li>End-to-end ownership</li>
+              <li>High talent density teams</li>
+              <li>Cross-functional partnership</li>
+              <li>Data-driven decisions</li>
+              <li>Translating requirements &rarr; solving business &amp; user problems</li>
+            </ul>
           </div>
         </div>
         <div class="about-detail-item">
@@ -564,14 +580,57 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
             <span class="tag">Product Strategy</span><span class="tag">AI/ML Integration</span><span class="tag">0-to-1 Products</span><span class="tag">Platform Architecture</span><span class="tag">Revenue Growth</span><span class="tag">GTM Execution</span><span class="tag">Experimentation</span><span class="tag">Cross-Functional Leadership</span>
           </div>
         </div>
-        <div class="about-detail-item">
-          <div class="about-detail-label">Education</div>
-          <div class="about-detail-value">
-            M.S. Information Systems (Business Intelligence) &mdash; University of Colorado Denver<br>
-            B.S. International Business &mdash; University of Colorado Denver
-          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="work">
+  <div class="container">
+    <div class="section-label">Featured work</div>
+    <h2 class="section-title">Problems I've <em>solved.</em></h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-name">Digital Document Verification (DocV)</div>
+        <div class="project-subtitle">Alaska Airlines &amp; Hawaiian Airlines &middot; iOS, Android, Web</div>
+        <div class="project-desc">
+          International travelers were forced to call in or visit the airport to verify travel documents&mdash;creating friction, increasing operational costs, and driving poor NPS. I led the 0-to-1 product initiative to build a self-service document verification experience, integrating Jumio's identity verification API with IATA's Timatic regulatory database. Scoped all edge cases including 207 passport nationalities, minors, and traveling with pets. Designed a phased rollout via Optimizely across pilot routes, with comprehensive GTM, RACI, and success metrics.
+        </div>
+        <div class="project-metrics">
+          <div><div class="metric-value">&lt;2 min</div><div class="metric-label">Verification time</div></div>
+          <div><div class="metric-value">207</div><div class="metric-label">Passport nationalities</div></div>
+          <div><div class="metric-value">3</div><div class="metric-label">Platforms (iOS, Android, Web)</div></div>
+          <div><div class="metric-value">2 brands</div><div class="metric-label">Alaska + Hawaiian</div></div>
         </div>
       </div>
+
+      <div class="project-card">
+        <div class="project-name">Check-in Modernization &amp; Revenue Growth</div>
+        <div class="project-subtitle">Alaska Airlines &middot; Product-Led Growth</div>
+        <div class="project-desc">
+          Led the end-to-end modernization of Alaska Airlines' check-in platform, retiring legacy architecture and driving 87% digital self-service adoption while generating $2M/month in new ancillary revenue from bags and seat upgrades. Built a comprehensive roadmap, created a testing process that balanced revenue upsell goals with customer satisfaction, and established data-driven feedback loops to continuously optimize conversion. Led the Boarding Pass Redesign by conducting competitive analysis and prioritizing the details travelers need most: gate changes, seat assignments, boarding times, flight delays, TSA PreCheck, loyalty status, and document verification status. Delivered an in-house boarding pass generator with digital wallet integration, replacing third-party dependencies and giving e-commerce full control over the traveler experience.
+        </div>
+        <div class="project-metrics">
+          <div><div class="metric-value">87%</div><div class="metric-label">Digital self-service adoption</div></div>
+          <div><div class="metric-value">$2M/mo</div><div class="metric-label">New e-commerce revenue</div></div>
+          <div><div class="metric-value">3 mo</div><div class="metric-label">MVP delivery</div></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">Carrier Connect Marketplace</div>
+        <div class="project-subtitle">Alaska Airlines &amp; Oneworld Partners</div>
+        <div class="project-desc">
+          Co-led the development of a marketplace platform enabling cross-app discovery for Alaska and Oneworld alliance partners. Defined the value proposition, platform scalability requirements, and integration architecture to create new customer acquisition channels and seamless partner check-in experiences, ensuring that Alaska travelers connecting to Oneworld partners could check in to both segments from the Alaska app and vice versa.
+        </div>
+        <div class="project-metrics">
+          <div><div class="metric-value">Multi-airline</div><div class="metric-label">Cross-alliance integration</div></div>
+          <div><div class="metric-value">New channel</div><div class="metric-label">Customer acquisition</div></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -594,7 +653,7 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
         <div class="timeline-body">
           Lead product strategy and delivery for digital transformation initiatives across mobile and web. Own the international travel experience portfolio for Alaska and Hawaiian Airlines, defining platform capabilities, APIs, and shared infrastructure that serve multiple products and personas.
           <ul>
-            <li>Launched AI-powered Document Verification (Jumio + Timatic) covering 207 passport nationalities, minors, and edge cases with sub-2-minute completion across iOS, Android, and Web</li>
+            <li>Launched AI-powered Document Verification with Jumio and Timatic integrations to support self-service of 207 passport nationalities, visas, and green cards, as well as international travel with minors and edge cases, enabling travelers to complete document verification in under two minutes digitally via iOS, Android, and Web</li>
             <li>Drove 87% digital self-service adoption through modernized Express Check-in, retiring legacy architecture and generating $2M/month in new e-commerce revenue from ancillary products (bags, seat upgrades, priority boarding)</li>
             <li>Delivered MVP for Modernized Express Check-in within 3 months of hire after building the product roadmap, aligning cross-functional stakeholders, and securing executive buy-in; authored multi-year product strategy for international route expansion</li>
             <li>Co-led Carrier Connect marketplace enabling cross-app discovery for Alaska and Oneworld partners, expanding customer acquisition channels</li>
@@ -697,56 +756,6 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="work">
-  <div class="container">
-    <div class="section-label">Featured work</div>
-    <h2 class="section-title">Problems I've <em>solved.</em></h2>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-name">Digital Document Verification (DocV)</div>
-        <div class="project-subtitle">Alaska Airlines &amp; Hawaiian Airlines &middot; iOS, Android, Web</div>
-        <div class="project-desc">
-          International travelers were forced to call in or visit the airport to verify travel documents&mdash;creating friction, increasing operational costs, and driving poor NPS. I led the 0-to-1 product initiative to build a self-service document verification experience, integrating Jumio's identity verification API with IATA's Timatic regulatory database. Scoped all edge cases including 207 passport nationalities, minors, traveling with pets, and group reservations. Designed a phased rollout via Optimizely across pilot routes, with comprehensive GTM, RACI, and success metrics.
-        </div>
-        <div class="project-metrics">
-          <div><div class="metric-value">&lt;2 min</div><div class="metric-label">Verification time</div></div>
-          <div><div class="metric-value">207</div><div class="metric-label">Passport nationalities</div></div>
-          <div><div class="metric-value">3</div><div class="metric-label">Platforms (iOS, Android, Web)</div></div>
-          <div><div class="metric-value">2 brands</div><div class="metric-label">Alaska + Hawaiian</div></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-name">Check-in Modernization &amp; Revenue Growth</div>
-        <div class="project-subtitle">Alaska Airlines &middot; Product-Led Growth</div>
-        <div class="project-desc">
-          Alaska's check-in platform ran on aging legacy architecture with low digital adoption and limited e-commerce capability. I led the modernization initiative, building a comprehensive roadmap to retire the legacy system while integrating ancillary revenue streams (bags, seat upgrades, priority boarding). Created a testing process that balanced revenue upsell goals with customer satisfaction, and built data-driven feedback loops to continuously optimize conversion.
-        </div>
-        <div class="project-metrics">
-          <div><div class="metric-value">87%</div><div class="metric-label">Digital self-service adoption</div></div>
-          <div><div class="metric-value">$2M/mo</div><div class="metric-label">New e-commerce revenue</div></div>
-          <div><div class="metric-value">3 mo</div><div class="metric-label">MVP delivery</div></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-name">Carrier Connect Marketplace</div>
-        <div class="project-subtitle">Alaska Airlines &amp; Oneworld Partners</div>
-        <div class="project-desc">
-          Co-led the development of a marketplace platform enabling cross-app discovery for Alaska and Oneworld alliance partners. Defined the value proposition, platform scalability requirements, and integration architecture to create new customer acquisition channels and seamless partner check-in experiences.
-        </div>
-        <div class="project-metrics">
-          <div><div class="metric-value">Multi-airline</div><div class="metric-label">Cross-alliance integration</div></div>
-          <div><div class="metric-value">New channel</div><div class="metric-label">Customer acquisition</div></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- SIDE PROJECTS -->
 <section id="side-projects" style="background: var(--bg-elevated);">
   <div class="container">
@@ -756,7 +765,7 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
       <div class="side-project-status"><span class="status-dot"></span> In development</div>
       <div class="side-project-name">PitchMeet</div>
       <div class="side-project-tagline">Fixing the broken recruitment process.</div>
-      <div class="side-project-desc">PitchMeet is an app designed to reimagine how candidates and companies connect. The hiring process is fundamentally broken&mdash;opaque, inefficient, and frustrating for everyone involved. PitchMeet is built to bring transparency, speed, and genuine alignment to recruitment so the right people find the right opportunities faster.</div>
+      <div class="side-project-desc">PitchMeet is an app designed to reimagine how candidates and companies connect. The hiring process is fundamentally broken; opaque, inefficient, and frustrating for everyone involved. PitchMeet is built to bring transparency, speed, and genuine alignment to recruitment so the right people find the right opportunities faster.</div>
       <div class="side-project-tags">
         <span class="timeline-tag">0-to-1 Product</span>
         <span class="timeline-tag">Recruitment</span>
@@ -848,7 +857,7 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
     <div class="section-label">Life beyond work</div>
     <h2 class="section-title">What keeps me <em>curious.</em></h2>
     <div class="beyond-content">
-      <p>Outside of product management, I'm endlessly curious. I'm currently exploring AI agentic workflows and LLMs for product functions, learning guitar (2026 goal: master "Losing My Religion" by REM), and painting in acrylics inspired by Yayoi Kusama's dot style. I live in Golden, Colorado with my partner and two children, where we cherish competitive board game nights, hiking 8&ndash;12 mile adventures, and impromptu dance parties in the living room.</p>
+      <p>Outside of product management, I'm endlessly curious. I'm currently exploring AI agentic workflows and LLMs for product functions, learning guitar (2026 goal: master "Losing My Religion" by REM), and painting in acrylics inspired by Yayoi Kusama's dot style. I live in Golden, Colorado with my partner and two children, where we cherish competitive board game nights, hiking adventures, and impromptu dance parties in the living room.</p>
     </div>
     <div class="beyond-highlights">
       <div class="beyond-item">
@@ -975,10 +984,4 @@ document.querySelectorAll('.volunteer-card').forEach((el, i) => {
   observer.observe(el);
 });
 
-// Side project card
-document.querySelectorAll('.side-project-card').forEach(el => {
-  el.classList.add('scale-in'); observer.observe(el);
-});
-</script>
-</body>
-</html>
+// Side pr
