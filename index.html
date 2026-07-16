@@ -3,668 +3,1004 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spellionaire — Interactive Prototype</title>
+<title>Jen Deepa | Product Leader</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --coral:#FF6B5E; --coral-deep:#E44D3F; --coral-soft:#FFE3DE;
-    --turq:#17BEBB; --turq-deep:#0E9B94; --turq-soft:#DDF6F5;
-    --ink:#22343B; --muted:#6B7F86; --cream:#FDFAF5; --card:#FFFFFF;
-    --radius:20px; --shadow:0 10px 30px rgba(34,52,59,.10);
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #fdf5f5;
+  --bg-elevated: #f9eded;
+  --bg-card: #ffffff;
+  --text: #3a2a2e;
+  --text-muted: #8a7075;
+  --accent: #d4849a;
+  --accent-soft: rgba(212, 132, 154, 0.1);
+  --accent-glow: rgba(212, 132, 154, 0.3);
+  --border: rgba(0,0,0,0.06);
+  --pastel-rose: #f2c4cc;
+  --pastel-blush: #f7d8dc;
+  --pastel-mauve: #dfc8d8;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -webkit-transform: translateZ(0);
+  overflow-x: hidden;
+}
+
+a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.8; }
+
+/* ---- NAV ---- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253, 245, 245, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 32px;
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--text);
+  letter-spacing: 0.02em;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); opacity: 1; }
+
+/* ---- SECTIONS ---- */
+section { padding: 100px 32px; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.section-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--serif); font-size: 2.6rem; line-height: 1.2;
+  margin-bottom: 24px; color: var(--text);
+}
+.section-title em {
+  font-style: italic; color: inherit;
+}
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding-top: 80px;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(242,196,204,0.3) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(223,200,216,0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 40% at 85% 80%, rgba(247,216,220,0.25) 0%, transparent 50%),
+    var(--bg);
+}
+.hero-content { max-width: 720px; }
+.hero-label {
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(3rem, 6vw, 4.4rem);
+  line-height: 1.1; margin-bottom: 28px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-intro {
+  font-size: 1.1rem; line-height: 1.8; color: var(--text-muted);
+  max-width: 580px; margin-bottom: 40px;
+}
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 6px; font-size: 0.9rem;
+  font-weight: 600; letter-spacing: 0.03em; transition: all 0.25s;
+  cursor: pointer; border: none;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+}
+.btn-primary:hover { background: #c0708a; opacity: 1; }
+.btn-secondary {
+  background: transparent; color: var(--text);
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); opacity: 1; }
+
+.hero-meta {
+  margin-top: 60px; display: flex; gap: 40px;
+  padding-top: 32px; border-top: 1px solid var(--border);
+}
+.hero-meta-item { }
+.hero-meta-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 4px; }
+.hero-meta-value { font-size: 0.95rem; font-weight: 500; }
+
+/* ---- ABOUT ---- */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: start;
+}
+.about-text p { color: var(--text-muted); margin-bottom: 20px; font-size: 1.02rem; }
+.about-text blockquote {
+  border-left: 3px solid var(--pastel-rose);
+  padding: 16px 24px; margin: 28px 0;
+  font-family: var(--serif); font-size: 1.15rem; font-style: italic;
+  color: var(--text); line-height: 1.6;
+  background: rgba(247,216,220,0.2); border-radius: 0 8px 8px 0;
+}
+.about-details { }
+.about-detail-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-detail-item:first-child { border-top: 1px solid var(--border); }
+.about-detail-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
+.about-detail-value { font-size: 0.95rem; font-weight: 400; }
+.value-list {
+  list-style: none; margin: 0; padding: 0;
+}
+.value-list li {
+  position: relative; padding-left: 16px; margin-bottom: 6px; font-size: 0.95rem;
+}
+.value-list li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 1px; background: var(--accent);
+}
+.about-detail-value .tag {
+  display: inline-block; padding: 4px 12px; margin: 3px 4px 3px 0;
+  background: rgba(242,196,204,0.3); border-radius: 4px; font-size: 0.82rem;
+  color: #9a5568;
+}
+
+/* ---- EXPERIENCE TIMELINE ---- */
+.timeline { position: relative; padding-left: 40px; }
+.timeline::before {
+  content: ''; position: absolute; left: 7px; top: 8px; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--accent), var(--pastel-blush) 80%);
+}
+.timeline-entry { position: relative; margin-bottom: 56px; }
+.timeline-entry:last-child { margin-bottom: 0; }
+.timeline-dot {
+  position: absolute; left: -40px; top: 8px;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--accent);
+}
+.timeline-entry.current .timeline-dot {
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.timeline-header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+.timeline-company { font-family: var(--serif); font-size: 1.35rem; }
+.timeline-date { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.02em; }
+.timeline-role { font-size: 1rem; font-weight: 500; color: var(--accent); margin-bottom: 12px; }
+.timeline-body { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; }
+.timeline-body ul { list-style: none; margin-top: 12px; }
+.timeline-body li { position: relative; padding-left: 18px; margin-bottom: 8px; }
+.timeline-body li::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 1px; background: var(--accent);
+}
+.timeline-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.timeline-tag {
+  padding: 4px 12px; background: rgba(247,216,220,0.45);
+  border-radius: 4px; font-size: 0.78rem; color: #9a5568;
+  font-weight: 500;
+}
+.early-career { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+.early-career-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
+.early-career-item { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; flex-wrap: wrap; gap: 8px; }
+.early-career-role { font-size: 0.92rem; }
+.early-career-date { font-size: 0.82rem; color: var(--text-muted); }
+
+/* ---- PROJECTS ---- */
+.projects-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+.project-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 40px; transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.project-card:hover { border-color: rgba(212,132,154,0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+.project-icon { font-size: 1.6rem; margin-bottom: 16px; }
+.project-name { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 8px; }
+.project-subtitle { font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.project-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 20px; }
+.project-section { margin-bottom: 14px; }
+.project-section-label {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px;
+}
+.project-section-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; }
+.project-metrics { display: flex; gap: 32px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid var(--border); }
+.metric-value { font-family: var(--serif); font-size: 1.5rem; color: var(--accent); }
+.metric-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+/* ---- SKILLS ---- */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.skill-group { }
+.skill-group-title {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-muted); margin-bottom: 16px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.skill-items { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-item {
+  padding: 6px 14px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; font-size: 0.85rem; color: var(--text);
+  transition: border-color 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.skill-item:hover { border-color: var(--accent); }
+
+/* ---- EDUCATION ---- */
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.edu-card { padding: 28px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.edu-degree { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 6px; }
+.edu-school { color: var(--text-muted); font-size: 0.92rem; }
+.certs-section { margin-top: 48px; }
+.certs-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.cert-item {
+  padding: 8px 18px; background: rgba(223,200,216,0.3); border-radius: 6px;
+  font-size: 0.85rem; color: #7a5570; font-weight: 500;
+}
+
+/* ---- BEYOND ---- */
+.beyond-content {
+  max-width: 700px;
+}
+.beyond-content p { color: var(--text-muted); font-size: 1.02rem; margin-bottom: 20px; }
+.beyond-highlights {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 36px;
+}
+.beyond-item {
+  padding: 24px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.beyond-item-icon { font-size: 1.5rem; margin-bottom: 10px; }
+.beyond-item-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+.beyond-item-desc { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ---- SIDE PROJECTS ---- */
+.side-project-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 44px; max-width: 680px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.side-project-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+.side-project-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--accent); margin-bottom: 16px;
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  animation: gentlePulse 2s ease-in-out infinite;
+}
+.side-project-name { font-family: var(--serif); font-size: 1.8rem; margin-bottom: 6px; }
+.side-project-tagline { font-size: 1.05rem; color: var(--accent); font-weight: 500; margin-bottom: 18px; }
+.side-project-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 20px; }
+.side-project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ---- VOLUNTEERING ---- */
+.volunteer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.volunteer-card {
+  padding: 32px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.volunteer-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+.volunteer-icon { font-size: 1.6rem; margin-bottom: 14px; }
+.volunteer-org { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 4px; }
+.volunteer-role { font-size: 0.85rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+.volunteer-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ---- CONTACT ---- */
+.contact-section { text-align: center; padding: 120px 32px; }
+.contact-section .section-title { margin-bottom: 16px; }
+.contact-text { color: var(--text-muted); max-width: 560px; margin: 0 auto 40px; font-size: 1.02rem; }
+.contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+/* ---- FOOTER ---- */
+footer {
+  padding: 32px; text-align: center; font-size: 0.8rem;
+  color: var(--text-muted); border-top: 1px solid var(--border);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  section { padding: 72px 20px; }
+  .nav-inner {
+    padding: 14px 20px;
+    flex-direction: column; gap: 8px; align-items: center;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{height:100%;}
-  body{
-    font-family:'Outfit',system-ui,sans-serif; color:var(--ink);
-    background:
-      radial-gradient(600px 400px at 85% -10%, var(--turq-soft), transparent 70%),
-      radial-gradient(700px 500px at -10% 100%, var(--coral-soft), transparent 70%),
-      var(--cream);
-    display:flex; align-items:flex-start; justify-content:center; padding:24px 12px;
-    min-height:100%;
+  .nav-logo { text-align: center; }
+  .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .nav-links a { font-size: 0.75rem; }
+  .hero { padding-top: 140px; }
+  .hero h1 { font-size: 2.6rem; }
+  .hero-meta { flex-direction: column; gap: 20px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .beyond-highlights { grid-template-columns: 1fr; }
+  .volunteer-grid { grid-template-columns: 1fr; }
+  .project-metrics { flex-direction: column; gap: 16px; }
+  .section-title { font-size: 2rem; }
+
+  .fade-up, .slide-left, .slide-right, .scale-in {
+    transform: none !important;
+    transition: opacity 0.5s ease !important;
   }
-  .phone{
-    width:min(420px,100%); background:var(--card); border-radius:34px;
-    box-shadow:var(--shadow), 0 0 0 1px rgba(34,52,59,.06);
-    overflow:hidden; position:relative; min-height:760px; display:flex; flex-direction:column;
+  .fade-up.visible, .slide-left.visible, .slide-right.visible, .scale-in.visible {
+    opacity: 1 !important;
   }
-  .statusbar{display:flex; justify-content:space-between; padding:14px 24px 0; font-size:12px; font-weight:600; color:var(--muted);}
-  .screen{display:none; flex:1; flex-direction:column; padding:20px 24px 28px;}
-  .screen.active{display:flex; animation:fadeUp .35s ease both;}
-  @keyframes fadeUp{from{opacity:0; transform:translateY(10px);}to{opacity:1; transform:none;}}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
-
-  .logo{font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:28px; letter-spacing:-.5px;}
-  .logo .w{color:var(--turq-deep);} .logo .f{color:var(--coral);}
-  .tag{color:var(--muted); font-size:14px; margin-top:4px;}
-
-  h2{font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:22px; margin:18px 0 4px;}
-  .sub{color:var(--muted); font-size:14px; margin-bottom:14px;}
-
-  label{font-size:13px; font-weight:600; display:block; margin:14px 0 6px;}
-  input[type=text],input[type=email],input[type=password]{
-    width:100%; padding:14px 16px; font-size:16px; font-family:inherit;
-    border:2px solid #E5EAEB; border-radius:14px; background:#FBFDFD; outline:none;
-    transition:border-color .15s;
+  .side-project-card { padding: 24px; }
+  .project-card:hover,
+  .skill-item:hover,
+  .edu-card:hover,
+  .beyond-item:hover,
+  .volunteer-card:hover,
+  .side-project-card:hover {
+    transform: none !important;
   }
-  input:focus{border-color:var(--turq);}
-  .hint{font-size:12px; color:var(--muted); margin-top:5px;}
-  .hint.err{color:var(--coral-deep);}
+}
+@media (max-width: 480px) {
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 0.7rem; }
+  .hero h1 { font-size: 2rem; }
+  .beyond-highlights { grid-template-columns: 1fr; }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .contact-links { flex-direction: column; align-items: stretch; }
+  .contact-links .btn { width: 100%; justify-content: center; }
+}
 
-  .btn{
-    width:100%; padding:16px; border:none; border-radius:16px; cursor:pointer;
-    font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:17px;
-    background:var(--coral); color:#fff; margin-top:18px;
-    box-shadow:0 6px 0 var(--coral-deep); transition:transform .08s, box-shadow .08s;
-  }
-  .btn:active{transform:translateY(4px); box-shadow:0 2px 0 var(--coral-deep);}
-  .btn.turq{background:var(--turq); box-shadow:0 6px 0 var(--turq-deep);}
-  .btn.turq:active{box-shadow:0 2px 0 var(--turq-deep);}
-  .btn.ghost{background:transparent; color:var(--turq-deep); box-shadow:none; border:2px solid var(--turq); font-size:15px; padding:12px;}
-  .btn:disabled{opacity:.45; cursor:not-allowed; box-shadow:none; transform:none;}
-  .btn:focus-visible,input:focus-visible,.chip:focus-visible{outline:3px solid var(--turq); outline-offset:2px;}
+/* ---- ANIMATIONS ---- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes gentlePulse {
+  0%, 100% { box-shadow: 0 0 8px var(--accent-glow); }
+  50% { box-shadow: 0 0 18px var(--accent-glow); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
 
-  .bee{font-size:44px; text-align:center; margin:8px 0 2px;}
+.hero-label { opacity: 0; animation: fadeIn 0.8s ease 0.2s forwards; }
+.hero-intro { opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards; }
+.hero-ctas { opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards; }
+.hero-meta { opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards; }
 
-  /* lobby */
-  .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    padding:9px 13px; border-radius:999px; border:2px solid #E5EAEB; background:#fff;
-    font-family:inherit; font-size:13px; font-weight:600; color:var(--ink); cursor:pointer; transition:all .12s;
-  }
-  .chip:hover{border-color:var(--turq);}
-  .chip.sel{background:var(--turq); border-color:var(--turq); color:#fff;}
-  .chip.coralsel.sel{background:var(--coral); border-color:var(--coral);}
-  .section-label{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq-deep); margin:18px 0 8px;}
-  .players{display:flex; flex-direction:column; gap:8px; margin-top:4px;}
-  .player{
-    display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:14px;
-    background:var(--turq-soft); font-size:14px; font-weight:600; animation:fadeUp .3s ease both;
-  }
-  .player .avatar{width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:var(--turq); color:#fff; font-weight:700; font-size:14px;}
-  .player.you .avatar{background:var(--coral);} .player.you{background:var(--coral-soft);}
-  .player .ready{margin-left:auto; font-size:12px; color:var(--turq-deep); font-weight:700;}
-  .invite{
-    margin-top:14px; padding:12px 14px; border:2px dashed var(--coral); border-radius:14px;
-    display:flex; justify-content:space-between; align-items:center; font-size:14px;
-  }
-  .invite code{font-family:'Bricolage Grotesque'; font-weight:800; font-size:20px; letter-spacing:.2em; color:var(--coral-deep);}
+nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
 
-  /* collapsibles */
-  .collapse{border:2px solid #EDF2F2; border-radius:16px; margin-top:12px; overflow:hidden; background:#fff;}
-  .collapse-head{width:100%; display:flex; align-items:center; gap:8px; padding:13px 14px; background:#fff; border:none; cursor:pointer; font-family:inherit;}
-  .collapse-head .lab{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq-deep);}
-  .collapse-head .cur{margin-left:auto; font-size:13px; font-weight:700; color:var(--coral-deep); background:var(--coral-soft); padding:4px 10px; border-radius:999px;}
-  .collapse-head .chev{transition:transform .2s; color:var(--muted); font-size:13px;}
-  .collapse.open .chev{transform:rotate(180deg);}
-  .collapse-body{max-height:0; overflow:hidden; transition:max-height .25s ease, padding .25s ease; padding:0 14px;}
-  .collapse.open .collapse-body{max-height:320px; padding:2px 14px 14px; overflow:auto;}
+.fade-up {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
-  /* presence + invites */
-  .pdot{width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:4px; vertical-align:1px;}
-  .pdot.on{background:#2FBF71;} .pdot.off{background:#C3CDD0;}
-  .player.off{background:#F4F7F7; color:var(--muted); cursor:pointer; transition:background .15s;}
-  .player.off:hover{background:#EAF1F1;}
-  .player.off .avatar{background:#C3CDD0;}
-  .player .status{margin-left:auto; font-size:12px; font-weight:700;}
-  .player .status.on{color:var(--turq-deep);} .player .status.off{color:var(--muted);}
-  .toast{position:absolute; left:50%; bottom:22px; transform:translateX(-50%); background:var(--ink); color:#fff; font-size:13px; font-weight:600; padding:10px 18px; border-radius:999px; opacity:0; transition:opacity .25s; pointer-events:none; white-space:nowrap; z-index:5; max-width:92%;}
-  .toast.show{opacity:1;}
-  .dotlogo{display:block; margin:0 auto;}
-  .wl{width:26px; height:26px; border-radius:9px; display:grid; place-items:center; font-family:'Bricolage Grotesque'; font-weight:800; font-size:13px; color:#fff; flex-shrink:0;}
-  .wl.w{background:var(--turq);} .wl.l{background:var(--coral);}
-  .histmeta{font-size:12px; color:var(--muted); font-weight:500;}
+.slide-left {
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.slide-left.visible { opacity: 1; transform: translateX(0); }
 
-  /* rare word splash */
-  #s-daily{position:relative; overflow:hidden; justify-content:center; text-align:center;
-    background:radial-gradient(500px 320px at 20% 15%, var(--turq-soft), transparent 70%),
-               radial-gradient(500px 320px at 85% 90%, var(--coral-soft), transparent 70%), #fff;}
-  .floatdot{position:absolute; border-radius:50%; opacity:.5; animation:drift 9s ease-in-out infinite alternate; pointer-events:none;}
-  @keyframes drift{from{transform:translate(0,0) scale(1);}to{transform:translate(14px,-26px) scale(1.25);}}
-  .daily-label{font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--turq-deep); animation:fadeUp .5s ease both;}
-  .daily-word{font-family:'Bricolage Grotesque'; font-weight:800; font-size:40px; margin:14px 0 4px;
-    display:flex; justify-content:center; flex-wrap:wrap; gap:2px;}
-  .daily-word .L{display:inline-block; animation:letterpop .5s cubic-bezier(.2,1.6,.4,1) both;
-    background:linear-gradient(120deg, var(--coral) 0%, var(--turq-deep) 100%);
-    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
-  @keyframes letterpop{from{opacity:0; transform:translateY(26px) scale(.4) rotate(-8deg);}to{opacity:1; transform:none;}}
-  .daily-def{font-size:16px; color:var(--ink); margin:14px 18px 0; line-height:1.5; animation:fadeUp .6s .9s ease both;}
-  .daily-sent{font-size:14px; color:var(--muted); font-style:italic; margin:12px 22px 0; line-height:1.5; animation:fadeUp .6s 1.3s ease both;}
-  .daily-speak{margin:18px auto 0; animation:fadeUp .6s 1.6s ease both;}
-  .daily-timer{position:absolute; left:0; right:0; bottom:0; height:6px; background:#EEF3F3;}
-  .daily-timer .fill{height:100%; width:100%; background:linear-gradient(90deg, var(--coral), var(--turq));
-    transform-origin:left; animation:shrink 20s linear forwards;}
-  @keyframes shrink{from{transform:scaleX(1);}to{transform:scaleX(0);}}
-  .daily-skip{position:absolute; top:14px; right:16px; background:rgba(255,255,255,.85); border:2px solid #E5EAEB;
-    border-radius:999px; padding:8px 16px; font-family:inherit; font-weight:700; font-size:13px; color:var(--muted); cursor:pointer;}
-  .daily-count{font-size:12px; color:var(--muted); font-weight:700; margin-top:16px; animation:fadeUp .6s 1.8s ease both;}
+.slide-right {
+  opacity: 0; transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.slide-right.visible { opacity: 1; transform: translateX(0); }
 
-  /* game */
-  .topbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;}
-  .roundpill{background:var(--coral-soft); color:var(--coral-deep); font-weight:700; font-size:13px; padding:6px 12px; border-radius:999px;}
-  .lvlpill{background:var(--turq-soft); color:var(--turq-deep); font-weight:700; font-size:13px; padding:6px 12px; border-radius:999px;}
-  .timerwrap{display:grid; place-items:center; margin:14px 0 6px;}
-  .ring{position:relative; width:110px; height:110px;}
-  .ring svg{transform:rotate(-90deg);}
-  .ring .num{position:absolute; inset:0; display:grid; place-items:center; font-family:'Bricolage Grotesque'; font-weight:800; font-size:30px;}
-  .speak{
-    margin:10px auto 0; display:flex; align-items:center; gap:8px; padding:12px 20px;
-    border-radius:999px; border:none; cursor:pointer; background:var(--turq); color:#fff;
-    font-family:inherit; font-weight:700; font-size:15px; box-shadow:0 5px 0 var(--turq-deep);
-  }
-  .speak:active{transform:translateY(3px); box-shadow:0 2px 0 var(--turq-deep);}
-  .hints{display:flex; gap:8px; justify-content:center; margin-top:10px;}
-  .hintbtn{background:#fff; border:2px solid #E5EAEB; border-radius:999px; padding:8px 14px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer;}
-  .hintbtn:hover{border-color:var(--coral);}
-  .hinttext{min-height:40px; text-align:center; font-size:14px; color:var(--muted); margin-top:10px; padding:0 6px; font-style:italic;}
-  .tiles{display:flex; gap:5px; justify-content:center; flex-wrap:wrap; margin:12px 0 4px; min-height:46px;}
-  .tile{
-    width:34px; height:42px; border-radius:9px; background:var(--coral-soft); color:var(--coral-deep);
-    display:grid; place-items:center; font-family:'Bricolage Grotesque'; font-weight:800; font-size:20px;
-    text-transform:uppercase; animation:pop .15s ease both;
-  }
-  @keyframes pop{from{transform:scale(.5); opacity:0;}to{transform:scale(1); opacity:1;}}
-  .opps{display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap;}
-  .opp{font-size:12px; font-weight:600; color:var(--muted); background:#F2F6F6; padding:6px 12px; border-radius:999px;}
-  .opp.done{background:var(--turq-soft); color:var(--turq-deep);}
+.scale-in {
+  opacity: 0; transform: scale(0.92);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scale-in.visible { opacity: 1; transform: scale(1); }
 
-  /* reveal + results */
-  .bigword{font-family:'Bricolage Grotesque'; font-weight:800; font-size:34px; text-align:center; color:var(--turq-deep); margin:8px 0; letter-spacing:.03em;}
-  .verdict{text-align:center; font-weight:700; font-size:18px; margin-bottom:12px;}
-  .verdict.good{color:var(--turq-deep);} .verdict.bad{color:var(--coral-deep);}
-  .scorelist{display:flex; flex-direction:column; gap:8px; margin-top:8px;}
-  .scorerow{display:flex; align-items:center; gap:10px; background:#F7FAFA; border-radius:14px; padding:11px 14px; font-size:14px; font-weight:600;}
-  .scorerow .pts{margin-left:auto; font-family:'Bricolage Grotesque'; font-weight:800;}
-  .scorerow .delta{font-size:12px; color:var(--turq-deep); font-weight:700;}
-  .scorerow.me{background:var(--coral-soft);}
-  .scorerow.winner{background:var(--turq-soft); box-shadow:inset 0 0 0 2px var(--turq);}
-  .subm{font-size:12px; color:var(--muted); font-weight:500;}
-  .subm.wrong{color:var(--coral-deep); text-decoration:line-through;}
-  .trophy{font-size:52px; text-align:center;}
-  .confetti{text-align:center; font-size:22px; letter-spacing:6px;}
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+
+.timeline-entry.current .timeline-dot {
+  animation: gentlePulse 2.5s ease-in-out infinite;
+}
+
+.project-card { transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
+.project-card:hover { transform: translateY(-4px); }
+
+.skill-item { transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+.skill-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+
+.edu-card { transition: transform 0.3s, box-shadow 0.3s; }
+.edu-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+
+.beyond-item { transition: transform 0.3s, box-shadow 0.3s; }
+.beyond-item:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+
+.cert-item { transition: transform 0.2s; }
+.cert-item:hover { transform: translateY(-2px); }
+
+.btn { transition: all 0.25s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.nav-links a { position: relative; }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after { width: 100%; }
+
+.section-label {
+  background: linear-gradient(90deg, var(--accent) 0%, #e8a0b4 50%, var(--accent) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-label.visible {
+  animation: shimmer 3s ease-in-out 1;
+}
+
+.metric-value { transition: transform 0.3s; }
+.project-card:hover .metric-value { transform: scale(1.05); }
 </style>
 </head>
 <body>
-<div class="phone">
-  <div class="statusbar"><span></span><span>🐝 Spellionaire</span><span></span></div>
 
-  <!-- SIGN UP -->
-  <section class="screen active" id="s-signup">
-    <svg class="dotlogo" width="160" height="104" viewBox="0 0 150 100" role="img" aria-label="Spellionaire dot-art bee logo">
-      <path d="M10 92 Q 42 98 56 76" fill="none" stroke="#17BEBB" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1 9"/>
-      <g fill="#17BEBB">
-        <circle cx="70" cy="20" r="5"/><circle cx="82" cy="14" r="6"/><circle cx="94" cy="19" r="5"/>
-        <circle cx="76" cy="30" r="4"/><circle cx="88" cy="28" r="4"/>
-        <circle cx="104" cy="12" r="3.5" opacity=".65"/><circle cx="62" cy="12" r="3" opacity=".65"/>
-      </g>
-      <circle cx="52" cy="56" r="8" fill="#FF6B5E"/>
-      <circle cx="46" cy="46" r="3" fill="#FF6B5E"/><circle cx="58" cy="44" r="3" fill="#FF6B5E"/>
-      <circle cx="55" cy="54" r="1.8" fill="#fff"/>
-      <g fill="#22343B"><circle cx="66" cy="50" r="4.5"/><circle cx="66" cy="61" r="4.5"/><circle cx="67" cy="72" r="3.5"/></g>
-      <g fill="#FF6B5E"><circle cx="78" cy="48" r="5"/><circle cx="78" cy="60" r="5"/><circle cx="79" cy="72" r="4"/></g>
-      <g fill="#22343B"><circle cx="90" cy="50" r="4.5"/><circle cx="90" cy="61" r="4.5"/><circle cx="91" cy="71" r="3.5"/></g>
-      <g fill="#FF6B5E"><circle cx="101" cy="53" r="4"/><circle cx="101" cy="63" r="4"/></g>
-      <g fill="#22343B"><circle cx="110" cy="56" r="3"/><circle cx="111" cy="64" r="2.5"/><circle cx="118" cy="60" r="2"/></g>
-      <path d="M48 48 Q 44 38 38 34" fill="none" stroke="#22343B" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="38" cy="34" r="3" fill="#17BEBB"/>
-      <path d="M56 46 Q 56 36 62 31" fill="none" stroke="#22343B" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="62" cy="31" r="3" fill="#FF6B5E"/>
-    </svg>
-    <div class="logo" style="text-align:center;"><span class="w">Spell</span><span class="f">ionaire</span></div>
-    <p class="tag" style="text-align:center;">A social app for spellers.</p>
-    <h2>Jump right in</h2>
-    <p class="sub">No account, no password. Your first name, a unique username, and you're playing.</p>
-    <label for="f-first">First name</label>
-    <input type="text" id="f-first" placeholder="Jen" autocomplete="given-name">
-    <label for="f-user">Unique username</label>
-    <input type="text" id="f-user" placeholder="spelling.bee!jen" autocomplete="username" autocapitalize="off" spellcheck="false">
-    <div class="hint" id="user-hint">3–15 characters: letters, numbers, and . - ! # $ * ~</div>
-    <button class="btn" id="btn-start-play">Start playing & invite friends</button>
-  </section>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Jen Deepa</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#volunteering">Community</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <!-- RARE WORD SPLASH -->
-  <section class="screen" id="s-daily">
-    <button class="daily-skip" id="btn-skipdaily">Skip →</button>
-    <div class="daily-label">✨ Your rare word</div>
-    <div class="daily-word" id="daily-word"></div>
-    <p class="daily-def" id="daily-def"></p>
-    <p class="daily-sent" id="daily-sent"></p>
-    <button class="speak daily-speak" id="btn-dailyspeak">🔊 Hear it</button>
-    <div class="daily-count" id="daily-count">Off to the hive in 20s</div>
-    <div class="daily-timer"><div class="fill" id="daily-fill"></div></div>
-  </section>
-
-  <!-- LOBBY -->
-  <section class="screen" id="s-lobby">
-    <div style="display:flex; align-items:center; justify-content:space-between;">
-      <div class="logo" style="font-size:20px;"><span class="w">Spell</span><span class="f">ionaire</span></div>
-      <button class="hintbtn" id="btn-switch" style="color:var(--coral-deep); border-color:var(--coral-soft);">Switch player</button>
-    </div>
-    <h2 id="lobby-hello">New match</h2>
-    <p class="sub">You're the host. Pick a level and category, then wait for the swarm.</p>
-
-    <div class="collapse" id="col-level">
-      <button class="collapse-head" onclick="toggleCol('col-level')" aria-expanded="false"><span class="lab">Level</span><span class="cur" id="cur-level">Grade 4</span><span class="chev">▾</span></button>
-      <div class="collapse-body"><div class="chips" id="levels"></div></div>
-    </div>
-
-    <div class="collapse" id="col-cat">
-      <button class="collapse-head" onclick="toggleCol('col-cat')" aria-expanded="false"><span class="lab">Category</span><span class="cur" id="cur-cat">All Categories</span><span class="chev">▾</span></button>
-      <div class="collapse-body"><div class="chips" id="cats"></div></div>
-    </div>
-
-    <div class="section-label">Players (2–10) · tap an offline friend to invite</div>
-    <div class="players" id="playerlist"></div>
-    <div class="invite"><span>Invite code</span><code>BUZZ42</code><button class="hintbtn" onclick="fakeCopy(this)">Copy</button></div>
-
-    <div class="collapse" id="col-hist">
-      <button class="collapse-head" onclick="toggleCol('col-hist')" aria-expanded="false"><span class="lab">Match history</span><span class="cur" id="cur-hist">0W · 0L</span><span class="chev">▾</span></button>
-      <div class="collapse-body"><div class="scorelist" id="histlist"></div></div>
-    </div>
-
-    <button class="btn turq" id="btn-start" disabled>Waiting for players…</button>
-  </section>
-
-  <!-- GAME -->
-  <section class="screen" id="s-game">
-    <div class="topbar">
-      <span class="roundpill" id="round-pill">Round 1 of 5</span>
-      <span class="lvlpill" id="level-pill"></span>
-    </div>
-    <div class="timerwrap">
-      <div class="ring">
-        <svg width="110" height="110"><circle cx="55" cy="55" r="48" fill="none" stroke="#EDF2F2" stroke-width="9"/><circle id="ringfg" cx="55" cy="55" r="48" fill="none" stroke="var(--turq)" stroke-width="9" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="0"/></svg>
-        <div class="num" id="timer-num">25</div>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-label">Product Manager</p>
+      <p class="hero-intro">I bring clarity to complexity. With 12+ years leading digital products across aviation, healthcare, and e-commerce, I turn ambiguous problems into scalable platforms that drive real business outcomes.</p>
+      <div class="hero-ctas">
+        <a href="#work" class="btn btn-primary">See my work</a>
+        <a href="#contact" class="btn btn-secondary">Get in touch</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Based in</div>
+          <div class="hero-meta-value">Golden, Colorado</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Industries</div>
+          <div class="hero-meta-value">Aviation, Healthcare, Fintech</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Open to</div>
+          <div class="hero-meta-value">Senior / Principal PM roles</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Currently exploring</div>
+          <div class="hero-meta-value">Agentic AI, MCP Architecture, Vibe Coding</div>
+        </div>
       </div>
     </div>
-    <button class="speak" id="btn-speak">🔊 Hear the word</button>
-    <div class="hints">
-      <button class="hintbtn" id="btn-def">Definition</button>
-      <button class="hintbtn" id="btn-sent">Use in a sentence</button>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About me</div>
+    <h2 class="section-title">Clarity from complexity. Vision into <em>action.</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>My superpower is asking the right questions until alignment emerges. I dive deep into the problems businesses face, understand the needs of internal and external users, then bring clear vision and actionable requirements to the team for execution and iteration.</p>
+        <p>At Alaska Airlines, I led the international travel experience product portfolio&mdash;a platform spanning iOS, Android, and Web that integrates AI-powered document verification, passport capture, and modernized check-in for millions of guests across two airline brands. Before that, I built digital aviation SaaS at Boeing/Jeppesen, launched Spectrum Mobile at Charter Communications through Slalom, and drove a 17% enrollment increase at Aetna through digital redesign.</p>
+        <blockquote>&ldquo;I thrive on ownership, bringing clarity to ambiguity, and creating environments where talented people can do their best work.&rdquo;</blockquote>
+        <p>I immigrated to the United States as a teenager, building a career with determination and resilience. My multicultural background, speaking English, Hindi, and Tamil fluently, enriches how I think about user experience, accessibility, and inclusive product design. I've traveled to 35 countries and counting. It's allowed me to connect with people from all walks of life and shapes how I build products with inclusive design in mind.</p>
+      </div>
+      <div class="about-details">
+        <div class="about-detail-item">
+          <div class="about-detail-label">What I value</div>
+          <div class="about-detail-value">
+            <ul class="value-list">
+              <li>End-to-end ownership</li>
+              <li>High talent density teams</li>
+              <li>Cross-functional partnership</li>
+              <li>Data-driven decisions</li>
+              <li>Student-of-life mindset</li>
+            </ul>
+          </div>
+        </div>
+        <div class="about-detail-item">
+          <div class="about-detail-label">Industries</div>
+          <div class="about-detail-value">
+            <span class="tag">Airline</span><span class="tag">Aviation</span><span class="tag">Healthcare</span><span class="tag">Health Insurance</span><span class="tag">E-commerce</span><span class="tag">Fintech</span><span class="tag">Marketplace</span>
+          </div>
+        </div>
+        <div class="about-detail-item">
+          <div class="about-detail-label">Core competencies</div>
+          <div class="about-detail-value">
+            <span class="tag">Product Strategy</span><span class="tag">AI/ML Integration</span><span class="tag">0-to-1 Products</span><span class="tag">Platform Architecture</span><span class="tag">Revenue Growth</span><span class="tag">GTM Execution</span><span class="tag">Experimentation</span><span class="tag">Cross-Functional Leadership</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="hinttext" id="hinttext">Tap the speaker, then spell what you hear.</div>
-    <div class="tiles" id="tiles"></div>
-    <input type="text" id="f-spell" placeholder="type your spelling…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="text-align:center;">
-    <button class="btn" id="btn-submit">Submit spelling</button>
-    <div class="opps" id="opp-status"></div>
-  </section>
+  </div>
+</section>
 
-  <!-- REVEAL -->
-  <section class="screen" id="s-reveal">
-    <div class="topbar"><span class="roundpill" id="reveal-pill"></span><span class="lvlpill" id="reveal-lvl"></span></div>
-    <p class="sub" style="text-align:center; margin-top:16px;">The word was</p>
-    <div class="bigword" id="reveal-word"></div>
-    <div class="verdict" id="reveal-verdict"></div>
-    <div class="section-label">Scores</div>
-    <div class="scorelist" id="reveal-scores"></div>
-    <button class="btn turq" id="btn-next">Next word</button>
-  </section>
+<!-- PROJECTS -->
+<section id="work">
+  <div class="container">
+    <div class="section-label">Featured work</div>
+    <h2 class="section-title">Problems I've <em>solved.</em></h2>
+    <div class="projects-grid">
 
-  <!-- RESULTS -->
-  <section class="screen" id="s-results">
-    <div class="trophy">🏆</div>
-    <div class="confetti">🎉 🐝 🎉</div>
-    <h2 style="text-align:center;" id="final-title"></h2>
-    <p class="sub" style="text-align:center;" id="final-sub"></p>
-    <div class="scorelist" id="final-scores"></div>
-    <button class="btn" id="btn-rematch">Rematch 🔁</button>
-    <button class="btn ghost" id="btn-newmatch">New match settings</button>
-  </section>
+      <div class="project-card">
+        <div class="project-name">Digital Document Verification (DocV)</div>
+        <div class="project-subtitle">Alaska Airlines &amp; Hawaiian Airlines &middot; iOS, Android, Web</div>
+        <div class="project-desc">
+          <div class="project-section">
+            <div class="project-section-label">Challenge</div>
+            <div class="project-section-text">International travelers were forced to call in or visit the airport to verify travel documents, creating friction, increasing operational costs, and driving poor NPS.</div>
+          </div>
+          <div class="project-section">
+            <div class="project-section-label">Approach</div>
+            <div class="project-section-text">Led the 0-to-1 product initiative integrating Jumio's identity verification API with IATA's Timatic regulatory database. Scoped all edge cases including 207 passport nationalities, minors, and traveling with pets. Designed a phased rollout via Optimizely across pilot routes, with comprehensive GTM, RACI, and success metrics.</div>
+          </div>
+          <div class="project-section">
+            <div class="project-section-label">Outcome</div>
+            <div class="project-section-text">Delivered a fully self-service document verification experience completing in under two minutes across iOS, Android, and Web, serving both Alaska and Hawaiian Airlines brands.</div>
+          </div>
+        </div>
+        <div class="project-metrics">
+          <div><div class="metric-value">&lt;2 min</div><div class="metric-label">Verification time</div></div>
+          <div><div class="metric-value">207</div><div class="metric-label">Passport nationalities</div></div>
+          <div><div class="metric-value">3</div><div class="metric-label">Platforms (iOS, Android, Web)</div></div>
+          <div><div class="metric-value">2 brands</div><div class="metric-label">Alaska + Hawaiian</div></div>
+        </div>
+      </div>
 
-  <div class="toast" id="toast" role="status"></div>
-</div>
+      <div class="project-card">
+        <div class="project-name">Check-in Modernization &amp; Revenue Growth</div>
+        <div class="project-subtitle">Alaska Airlines &middot; Product-Led Growth</div>
+        <div class="project-desc">
+          <div class="project-section">
+            <div class="project-section-label">Challenge</div>
+            <div class="project-section-text">Alaska's check-in platform ran on aging legacy architecture with low digital adoption and limited e-commerce capability.</div>
+          </div>
+          <div class="project-section">
+            <div class="project-section-label">Approach</div>
+            <div class="project-section-text">Led the end-to-end modernization, building a comprehensive roadmap, creating a testing process that balanced revenue upsell goals with customer satisfaction, and establishing data-driven feedback loops to continuously optimize conversion. Led the Boarding Pass Redesign by conducting competitive analysis and prioritizing the details travelers need most: gate changes, seat assignments, boarding times, flight delays, TSA PreCheck, loyalty status, and document verification status.</div>
+          </div>
+          <div class="project-section">
+            <div class="project-section-label">Outcome</div>
+            <div class="project-section-text">Drove 87% digital self-service adoption while generating $2M/month in new ancillary revenue from bags and seat upgrades. Delivered an in-house boarding pass generator with digital wallet integration, replacing third-party dependencies and giving e-commerce full control over the traveler experience.</div>
+          </div>
+        </div>
+        <div class="project-metrics">
+          <div><div class="metric-value">87%</div><div class="metric-label">Digital self-service adoption</div></div>
+          <div><div class="metric-value">$2M/mo</div><div class="metric-label">New e-commerce revenue</div></div>
+          <div><div class="metric-value">3 mo</div><div class="metric-label">MVP delivery</div></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">Carrier Connect Marketplace</div>
+        <div class="project-subtitle">Alaska Airlines &amp; Oneworld Partners</div>
+        <div class="project-desc">
+          Co-led the development of a marketplace platform enabling cross-app discovery for Alaska and Oneworld alliance partners. Defined the value proposition, platform scalability requirements, and integration architecture to create new customer acquisition channels and seamless partner check-in experiences, ensuring that Alaska travelers connecting to Oneworld partners could check in to both segments from the Alaska app and vice versa.
+        </div>
+        <div class="project-metrics">
+          <div><div class="metric-value">Multi-airline</div><div class="metric-label">Cross-alliance integration</div></div>
+          <div><div class="metric-value">New channel</div><div class="metric-label">Customer acquisition</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background: var(--bg-elevated);">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Where I've <em>built.</em></h2>
+    <div class="timeline">
+
+      <!-- Alaska Airlines — UPDATED: end date May 2026 -->
+      <div class="timeline-entry current">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-company">Alaska Airlines</span>
+          <span class="timeline-date">December 2021 &mdash; May 2026</span>
+        </div>
+        <div class="timeline-role">Product Manager &mdash; International Travel Experiences</div>
+        <div class="timeline-body">
+          Lead product strategy and delivery for digital transformation initiatives across mobile and web. Own the international travel experience portfolio for Alaska and Hawaiian Airlines, defining platform capabilities, APIs, and shared infrastructure that serve multiple products and personas.
+          <ul>
+            <li>Built 0-to-1 Document Verification (Jumio + Timatic) covering 207 passport nationalities, minors, and edge cases; delivered self-service completion in under 2 minutes across iOS, Android, and Web</li>
+            <li>Drove 87% digital self-service adoption and $2M/month in new e-commerce revenue by modernizing check-in, retiring legacy architecture, and expanding ancillary upsell (bags, seat upgrades, priority boarding)</li>
+            <li>Delivered check-in MVP within 3 months of hire; authored multi-year international platform strategy with comprehensive GTM and testing plans</li>
+            <li>Co-led Carrier Connect marketplace for Alaska + Oneworld partners, defining value proposition and creating new cross-app discovery and customer acquisition channels</li>
+            <li>Accelerated delivery velocity with agentic AI workflows automating PRD and creative brief generation; improved conversion through A/B testing and data-driven feedback loops</li>
+          </ul>
+        </div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Product-Led Growth</span>
+          <span class="timeline-tag">AI/ML</span>
+          <span class="timeline-tag">Jumio</span>
+          <span class="timeline-tag">Timatic</span>
+          <span class="timeline-tag">Optimizely</span>
+          <span class="timeline-tag">Agile/Scrum</span>
+        </div>
+      </div>
+
+      <!-- Boeing/Jeppesen -->
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-company">Boeing / Jeppesen</span>
+          <span class="timeline-date">November 2017 &mdash; December 2021</span>
+        </div>
+        <div class="timeline-role">Solution Consultant &amp; Product Manager</div>
+        <div class="timeline-body">
+          Directed product development for commercial aviation digital solutions, driving platform adoption and operational efficiency across enterprise SaaS products.
+          <ul>
+            <li>Launched 0-to-1 FlightChat communications platform from concept to market; drove adoption through stakeholder interviews, user testing, and iterative prototyping</li>
+            <li>Redesigned University e-commerce platform&mdash;optimizing bundle discovery and checkout flow&mdash;improving conversion rates through data-informed UX enhancements</li>
+            <li>Built stakeholder buy-in via aviation conferences and internal workshops, accelerating user acquisition for new product launches</li>
+          </ul>
+        </div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Aviation SaaS</span>
+          <span class="timeline-tag">E-commerce</span>
+          <span class="timeline-tag">Market Validation</span>
+          <span class="timeline-tag">Enterprise Sales</span>
+        </div>
+      </div>
+
+      <!-- Slalom -->
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-company">Slalom</span>
+          <span class="timeline-date">August 2017 &mdash; November 2017</span>
+        </div>
+        <div class="timeline-role">Delivery Leadership Consultant</div>
+        <div class="timeline-body">
+          Led Spectrum Mobile 0-to-1 launch at Charter Communications; defined use cases, success metrics, and GTM strategy with UX and engineering to optimize customer acquisition.
+        </div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Telecom</span>
+          <span class="timeline-tag">GTM Strategy</span>
+          <span class="timeline-tag">UX Research</span>
+        </div>
+      </div>
+
+      <!-- Aetna -->
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-company">Aetna</span>
+          <span class="timeline-date">April 2016 &mdash; April 2017</span>
+        </div>
+        <div class="timeline-role">Product Manager, Consumer Digital Assets</div>
+        <div class="timeline-body">
+          Owned product strategy for MyAetna.com and MyInnovationHealth.com, driving enrollment optimization and engagement through digital redesign.
+          <ul>
+            <li>Increased enrollment conversion 17% by redesigning digital enrollment journeys, optimizing entry points, and running A/B tests to improve funnel performance</li>
+            <li>Partnered with Analytics to build KPI dashboards and funnel analysis, improving traffic-to-conversion rates</li>
+          </ul>
+        </div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Healthcare</span>
+          <span class="timeline-tag">Digital Enrollment</span>
+          <span class="timeline-tag">UX Optimization</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Early Career -->
+    <div class="early-career">
+      <div class="early-career-title">Earlier in my career</div>
+      <div class="early-career-item">
+        <span class="early-career-role"><strong>Product Manager</strong> &mdash; Arrow Electronics</span>
+        <span class="early-career-date">Sept 2012 &mdash; Sept 2014</span>
+      </div>
+      <div class="early-career-item">
+        <span class="early-career-role"><strong>Business Analyst</strong> &mdash; Catholic Health Services</span>
+        <span class="early-career-date">Sept 2015 &mdash; Dec 2015</span>
+      </div>
+      <div class="early-career-item">
+        <span class="early-career-role"><strong>Business Analyst Intern, Scrum Master</strong> &mdash; Kaiser Permanente</span>
+        <span class="early-career-date">June 2015 &mdash; Aug 2015</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SIDE PROJECTS -->
+<section id="side-projects" style="background: var(--bg-elevated);">
+  <div class="container">
+    <div class="section-label">Side projects</div>
+    <h2 class="section-title">What I'm <em>building.</em></h2>
+    <div class="side-project-card">
+      <div class="side-project-status"><span class="status-dot"></span> In development</div>
+      <div class="side-project-name">SpellWithFriends</div>
+      <div class="side-project-tagline">A social app for spellers.</div>
+      <div class="side-project-desc">Building a social app for spellers, bringing the energy of competitive spelling into a shareable, multiplayer format. Designed for word lovers to challenge friends, track progress, and compete in real time.</div>
+      <div class="side-project-tags">
+        <span class="timeline-tag">Social App</span>
+        <span class="timeline-tag">0-to-1 Product</span>
+        <span class="timeline-tag">App Development</span>
+      </div>
+      <a href="https://mrsspockdeepa.github.io/spellwithfriends/" target="_blank" class="btn btn-secondary" style="margin-top: 16px; display: inline-block;">View prototype</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--bg-elevated);">
+  <div class="container">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">My <em>toolkit.</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Product &amp; Strategy</div>
+        <div class="skill-items">
+          <span class="skill-item">Product Roadmapping</span>
+          <span class="skill-item">OKRs</span>
+          <span class="skill-item">PRDs</span>
+          <span class="skill-item">Creative Briefs</span>
+          <span class="skill-item">Test Case Documents</span>
+          <span class="skill-item">Evals</span>
+          <span class="skill-item">A/B Testing</span>
+          <span class="skill-item">Customer Discovery</span>
+          <span class="skill-item">GTM Strategy</span>
+          <span class="skill-item">Platform Strategy</span>
+          <span class="skill-item">Competitive Analysis</span>
+          <span class="skill-item">Design Thinking</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools &amp; Platforms</div>
+        <div class="skill-items">
+          <span class="skill-item">JIRA</span>
+          <span class="skill-item">Azure DevOps</span>
+          <span class="skill-item">Figma</span>
+          <span class="skill-item">Optimizely</span>
+          <span class="skill-item">Adobe Analytics</span>
+          <span class="skill-item">Salesforce</span>
+          <span class="skill-item">GitHub</span>
+          <span class="skill-item">Rally</span>
+          <span class="skill-item">Sabre</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">AI &amp; Technical</div>
+        <div class="skill-items">
+          <span class="skill-item">LLMs &amp; Agentic Workflows</span>
+          <span class="skill-item">MCP Architecture</span>
+          <span class="skill-item">Claude Code</span>
+          <span class="skill-item">Vibe Coding</span>
+          <span class="skill-item">AI Product Management</span>
+          <span class="skill-item">SQL</span>
+          <span class="skill-item">API Design</span>
+          <span class="skill-item">System Design Thinking</span>
+          <span class="skill-item">Agile / Scrum</span>
+          <span class="skill-item">Python (learning)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education & Certs -->
+    <div style="margin-top: 72px;">
+      <div class="section-label">Education &amp; Certifications</div>
+      <div class="edu-grid" style="margin-top: 24px;">
+        <div class="edu-card">
+          <div class="edu-degree">M.S. Information Systems</div>
+          <div class="edu-school">Business Intelligence &mdash; University of Colorado Denver</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">B.S. International Business</div>
+          <div class="edu-school">University of Colorado Denver</div>
+        </div>
+      </div>
+      <div class="certs-section">
+        <div class="certs-list">
+          <span class="cert-item">AI for Product Management (Pendo.io)</span>
+          <span class="cert-item">AI for Product Managers (Build Better)</span>
+          <span class="cert-item">Agent Skills with Anthropic (DeepLearning.AI)</span>
+          <span class="cert-item">AI Python Coding (DeepLearning.AI)</span>
+          <span class="cert-item">Building Agentic Mobile Applications (Maven)</span>
+          <span class="cert-item">AI for Product Managers (Maven)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND WORK -->
+<section id="beyond">
+  <div class="container">
+    <div class="section-label">Life beyond work</div>
+    <h2 class="section-title">What keeps me <em>curious.</em></h2>
+    <div class="beyond-content">
+      <p>Outside of product management, I&rsquo;m endlessly curious. I&rsquo;m currently exploring AI agentic workflows and LLMs for product functions, learning guitar (2026 goal: master &ldquo;Losing My Religion&rdquo; by R.E.M.). I live in Golden, Colorado with my partner and two children, where we cherish competitive board game nights, hiking adventures, and impromptu dance parties in the living room.</p>
+    </div>
+    <div class="beyond-highlights">
+      <div class="beyond-item">
+        <div class="beyond-item-title">I have travelled to 35 countries</div>
+        <div class="beyond-item-desc">Recent: Malta, Slovenia, Colombia. Next: Thailand, Indonesia.</div>
+      </div>
+      <div class="beyond-item">
+        <div class="beyond-item-title">3 languages</div>
+        <div class="beyond-item-desc">English, Hindi, and Tamil</div>
+      </div>
+      <div class="beyond-item">
+        <div class="beyond-item-title">Avid reader</div>
+        <div class="beyond-item-desc"><strong>Currently reading:</strong> System Design Interview by Alex Xu<br><strong>Recently Read:</strong> No Rules Rules, The Mom Test, Continuous Discovery Habits, Escaping the Build Trap by Melissa Perri, Culture Code<br><strong>Up next:</strong> Strong Product People, Thinking Fast &amp; Slow, The Making of a Manager</div>
+      </div>
+      <div class="beyond-item">
+        <div class="beyond-item-title">&#127942; Spelling Bee</div>
+        <div class="beyond-item-desc">Spelling Bee Champion in local Denver spelling bee events</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEERING -->
+<section id="volunteering" style="background: var(--bg-elevated);">
+  <div class="container">
+    <div class="section-label">Community</div>
+    <h2 class="section-title">Giving <em>back.</em></h2>
+    <div class="volunteer-grid">
+      <div class="volunteer-card">
+        <div class="volunteer-icon">&#127891;</div>
+        <div class="volunteer-org">Denver Urban Scholars</div>
+        <div class="volunteer-role">Youth Mentor</div>
+        <div class="volunteer-desc">Mentored young people and educated them about career pathways and opportunities in the technology industry.</div>
+      </div>
+      <div class="volunteer-card">
+        <div class="volunteer-icon">&#127968;</div>
+        <div class="volunteer-org">Habitat for Humanity</div>
+        <div class="volunteer-role">Volunteer</div>
+        <div class="volunteer-desc">Contributed hands-on building work to help provide affordable housing for families in need.</div>
+      </div>
+      <div class="volunteer-card">
+        <div class="volunteer-icon">&#127858;</div>
+        <div class="volunteer-org">The Delores Project</div>
+        <div class="volunteer-role">Dinner Organizer &amp; Food Server</div>
+        <div class="volunteer-desc">Organized and served meals for individuals experiencing homelessness, supporting Denver&rsquo;s shelter community.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section" style="background: var(--bg-elevated);">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's <em>talk.</em></h2>
+    <p class="contact-text">I'm exploring Senior and Principal Product Manager opportunities, particularly teams building products with complex real-world business rules in Travel, Healthcare, or Fintech. If you're building something interesting, I'd love to hear about it.</p>
+    <div class="contact-links">
+      <a id="email-btn" href="mailto:jenniferdeepa@gmail.com" class="btn btn-primary">Email me</a>
+      <a href="https://www.linkedin.com/in/jendeepa" target="_blank" class="btn btn-secondary">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Jen Deepa &middot; Golden, CO
+</footer>
 
 <script>
-/* ------- data ------- */
-const LEVELS = [...Array.from({length:12},(_,i)=>`Grade ${i+1}`),'Basic','Medium','Difficult','Champion'];
-const CATS = ['All Categories','Animals & Nature','Science','Geography','Food','Everyday Words'];
-const BANK = {
-  low:[ // Grades 1-4
-    {w:'apple',d:'A round fruit with red, green, or yellow skin.',s:'She packed an apple in her lunchbox.'},
-    {w:'smile',d:'A happy expression made with the mouth.',s:'The baby gave a big smile.'},
-    {w:'planet',d:'A large body that orbits a star.',s:'Earth is our home planet.'},
-    {w:'garden',d:'A place where plants and flowers grow.',s:'We planted tomatoes in the garden.'},
-    {w:'window',d:'An opening in a wall with glass.',s:'Sunlight came through the window.'}
-  ],
-  mid:[ // Grades 5-8
-    {w:'necessary',d:'Required; needed to be done.',s:'Water is necessary for life.'},
-    {w:'rhythm',d:'A repeated pattern of sound or movement.',s:'The drummer kept a steady rhythm.'},
-    {w:'peninsula',d:'Land surrounded by water on three sides.',s:'Florida is a peninsula.'},
-    {w:'broccoli',d:'A green vegetable with a dense flowering head.',s:'She steamed broccoli for dinner.'},
-    {w:'chameleon',d:'A lizard that can change color.',s:'The chameleon blended into the leaves.'}
-  ],
-  high:[ // Grades 9-12 & Basic
-    {w:'silhouette',d:'A dark outline seen against a lighter background.',s:'Her silhouette appeared in the doorway.'},
-    {w:'entrepreneur',d:'A person who starts and runs a business.',s:'The entrepreneur pitched her startup.'},
-    {w:'onomatopoeia',d:'A word that imitates the sound it describes.',s:'Buzz is an example of onomatopoeia.'},
-    {w:'archipelago',d:'A group or chain of islands.',s:'Indonesia is a vast archipelago.'},
-    {w:'accommodate',d:'To provide room for; to adapt to.',s:'The hotel can accommodate ten guests.'}
-  ],
-  expert:[ // Medium & Difficult
-    {w:'connoisseur',d:'An expert judge in matters of taste.',s:'He is a connoisseur of fine tea.'},
-    {w:'liaison',d:'A person who links two groups.',s:'She served as liaison between teams.'},
-    {w:'chiaroscuro',d:'The treatment of light and shade in art.',s:'The painting used dramatic chiaroscuro.'},
-    {w:'bourgeois',d:'Relating to the middle class.',s:'The novel satirized bourgeois life.'},
-    {w:'reconnaissance',d:'Military observation to gather information.',s:'The drone flew a reconnaissance mission.'}
-  ],
-  champ:[ // Champion — words from past Scripps National Spelling Bee competitions (publicly reported)
-    {w:'scherenschnitte',d:'The art of decorative paper cutting.',s:'The museum displayed intricate scherenschnitte.'},
-    {w:'knaidel',d:'A small round dumpling, such as a matzo ball.',s:'She ladled a knaidel into each bowl of soup.'},
-    {w:'koinonia',d:'Intimate spiritual communion and fellowship.',s:'The congregation cherished its sense of koinonia.'},
-    {w:'murraya',d:'A genus of tropical Asiatic trees of the citrus family.',s:'The murraya hedge bloomed with fragrant white flowers.'},
-    {w:'moorhen',d:'A common water bird related to the rails and coots.',s:'A moorhen paddled quietly across the pond.'},
-    {w:'psammophile',d:'An organism that thrives in sandy soil.',s:'The desert lizard is a classic psammophile.'},
-    {w:'abseil',d:'To descend a steep rock face using a doubled rope.',s:'The climbers had to abseil down the cliff at dusk.'}
-  ]
-};
-function poolFor(level){
-  const gi = LEVELS.indexOf(level);
-  if(gi<=3) return BANK.low; if(gi<=7) return BANK.mid;
-  if(gi<=12) return BANK.high; if(gi<=14) return BANK.expert; return BANK.champ;
-}
-function poolKey(level){
-  const gi = LEVELS.indexOf(level);
-  return gi<=3?'low':gi<=7?'mid':gi<=12?'high':gi<=14?'expert':'champ';
-}
-// FR-3.11: no word repeats at a level until the whole level pool has been served
-async function pickMatchWords(level, count){
-  const pool=poolFor(level), key='served-'+poolKey(level);
-  let served=[];
-  try{ const r=await window.storage.get(key); served=JSON.parse(r.value)||[]; }catch(e){}
-  let unseen=pool.filter(w=>!served.includes(w.w));
-  const picks=[];
-  while(picks.length<count){
-    if(unseen.length===0){ served=[]; unseen=pool.filter(w=>!picks.some(p=>p.w===w.w)); } // pool exhausted → reset
-    const i=Math.floor(Math.random()*unseen.length);
-    picks.push(unseen[i]); served.push(unseen[i].w); unseen.splice(i,1);
-  }
-  try{ await window.storage.set(key, JSON.stringify(served)); }catch(e){}
-  return picks;
-}
-const FRIENDS = [
-  {n:'Krystal', a:'K', online:true,  joined:false, invited:false},
-  {n:'Mara',    a:'M', online:true,  joined:false, invited:false},
-  {n:'Uche',    a:'U', online:false, joined:false, invited:false}
-];
-const ROUNDS = 5, TIME = 25;
-
-/* ------- state ------- */
-let state = {name:'Jen', level:'Grade 4', cat:'All Categories', round:0, words:[], scores:{}, timer:null, timeLeft:TIME, botAcc:.6, submitted:false, opponents:[]};
-
-/* ------- helpers ------- */
-const $ = id=>document.getElementById(id);
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); $(id).classList.add('active');}
-function speak(word){
-  try{ speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(word); u.rate=.85; speechSynthesis.speak(u);
-  }catch(e){ $('hinttext').textContent = '(Audio unavailable here — the word starts with "'+word[0].toUpperCase()+'")'; }
-}
-function fakeCopy(btn){btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy',1200);}
-
-/* ------- frictionless entry (no accounts) ------- */
-const USER_RE=/^[a-zA-Z0-9.!#$*~-]{3,15}$/;
-const TAKEN=['spellionaire','beequeen','wordwasp','krystal.k','uche','admin'];
-let player=null; // {first, user} — device-bound, no account
-$('f-user').addEventListener('input',e=>{
-  const u=e.target.value.trim().toLowerCase();
-  if(!u){$('user-hint').textContent='3–15 characters: letters, numbers, and . - ! # $ * ~'; $('user-hint').className='hint'; return;}
-  if(!USER_RE.test(u)){$('user-hint').textContent='3–15 characters: letters, numbers, and . - ! # $ * ~ only (no spaces).'; $('user-hint').className='hint err'; return;}
-  if(TAKEN.includes(u)){$('user-hint').textContent=`✗ "${u}" is taken — try ${u}.bee or ${u}${Math.floor(Math.random()*90+10)}`; $('user-hint').className='hint err'; return;}
-  $('user-hint').textContent='✓ Available'; $('user-hint').className='hint';
-});
-$('btn-start-play').addEventListener('click',()=>{
-  const first=$('f-first').value.trim()||'Player';
-  const u=$('f-user').value.trim(); const ul=u.toLowerCase();
-  if(!USER_RE.test(ul)){$('user-hint').textContent='3–15 characters: letters, numbers, and . - ! # $ * ~ only (no spaces).'; $('user-hint').className='hint err'; $('f-user').focus(); return;}
-  if(TAKEN.includes(ul)){$('user-hint').textContent=`✗ "${ul}" is taken — pick another.`; $('user-hint').className='hint err'; $('f-user').focus(); return;}
-  player={first,user:u};
-  state.name=u;
-  $('lobby-hello').textContent=`New match, hosted by ${u}`;
-  toast(`Welcome, ${first}! You're in — invite your friends 🐝`);
-  showDaily();
-});
-$('btn-switch').addEventListener('click',()=>{
-  clearInterval(state.timer);
-  FRIENDS.forEach(f=>{f.joined=false; f.invited=false; if(f.n==='Uche')f.online=false;});
-  ['f-first','f-user'].forEach(id=>$(id).value='');
-  $('user-hint').textContent='3–15 characters: letters, numbers, and . - ! # $ * ~'; $('user-hint').className='hint';
-  player=null;
-  toast('See you at the next bee 🐝');
-  show('s-signup');
-});
-
-/* ------- rare word splash ------- */
-const RARE = [
-  {w:'petrichor', d:'The pleasant, earthy smell that follows rain on dry ground.', s:'She flung the windows open to let in the petrichor.'},
-  {w:'apricity', d:'The warmth of the sun in winter.', s:'They lingered on the bench, savoring the apricity.'},
-  {w:'susurrus', d:'A soft whispering or rustling sound.', s:'A susurrus of leaves drifted through the grove.'},
-  {w:'mellifluous', d:'Sweet or musical; pleasant to hear.', s:'Her mellifluous voice calmed the whole room.'},
-  {w:'tintinnabulation', d:'The ringing or sounding of bells.', s:'The tintinnabulation carried across the valley.'},
-  {w:'sesquipedalian', d:'Given to using long words; polysyllabic.', s:'His sesquipedalian emails needed a dictionary.'},
-  {w:'halcyon', d:'Idyllically calm and peaceful; happy and golden.', s:'She reminisced about the halcyon days of summer.'},
-  {w:'borborygmus', d:'A rumbling sound made by the movement of gas in the intestines.', s:'A loud borborygmus interrupted the meeting.'}
-];
-let dailyT=null;
-async function pickRare(){
-  let seen=[];
-  try{ const r=await window.storage.get('rare-seen'); seen=JSON.parse(r.value)||[]; }catch(e){ /* first open or storage unavailable */ }
-  let avail=RARE.map((_,i)=>i).filter(i=>!seen.includes(i));
-  if(avail.length===0){ seen=[]; avail=RARE.map((_,i)=>i); } // full pool seen → reset (FR-7.4)
-  const i=avail[Math.floor(Math.random()*avail.length)];
-  seen.push(i);
-  try{ await window.storage.set('rare-seen', JSON.stringify(seen)); }catch(e){}
-  return i;
-}
-async function showDaily(){
-  const i=await pickRare(); const r=RARE[i];
-  $('daily-word').innerHTML=[...r.w].map((ch,k)=>`<span class="L" style="animation-delay:${.12*k}s">${ch}</span>`).join('');
-  $('daily-def').textContent=r.d;
-  $('daily-sent').textContent='“'+r.s+'”';
-  $('btn-dailyspeak').onclick=()=>speak(r.w);
-  // scatter fresh floating dots
-  document.querySelectorAll('.floatdot').forEach(d=>d.remove());
-  const palette=['#FF6B5E','#17BEBB','#FFC9C2','#9EE6E3'];
-  for(let k=0;k<14;k++){
-    const d=document.createElement('div'); d.className='floatdot';
-    const sz=6+Math.random()*22;
-    d.style.cssText=`width:${sz}px;height:${sz}px;background:${palette[k%4]};left:${Math.random()*92}%;top:${Math.random()*92}%;animation-delay:-${Math.random()*9}s;animation-duration:${7+Math.random()*6}s;`;
-    $('s-daily').appendChild(d);
-  }
-  // restart the 20s bar animation
-  const fill=$('daily-fill'); fill.style.animation='none'; void fill.offsetWidth; fill.style.animation='';
-  show('s-daily');
-  setTimeout(()=>speak(r.w), 700);
-  let left=20; $('daily-count').textContent='Off to the hive in 20s';
-  clearInterval(dailyT);
-  dailyT=setInterval(()=>{ left--;
-    if(left<=0){ endDaily(); } else { $('daily-count').textContent=`Off to the hive in ${left}s`; }
-  },1000);
-}
-function endDaily(){
-  clearInterval(dailyT); dailyT=null; speechSynthesis.cancel();
-  buildLobby(); show('s-lobby');
-}
-$('btn-skipdaily').addEventListener('click',endDaily);
-
-/* ------- lobby ------- */
-const HISTORY = [
-  {r:'W', lvl:'Grade 4', opp:'Krystal +1', pts:520},
-  {r:'L', lvl:'Medium',  opp:'Mara',       pts:305},
-  {r:'W', lvl:'Grade 6', opp:'Uche +2',    pts:465}
-];
-function renderHistory(){
-  const w=HISTORY.filter(h=>h.r==='W').length, l=HISTORY.length-w;
-  $('cur-hist').textContent=`${w}W · ${l}L`;
-  $('histlist').innerHTML = HISTORY.length
-    ? [...HISTORY].reverse().map(h=>
-      `<div class="scorerow"><span class="wl ${h.r.toLowerCase()}">${h.r}</span><span>vs ${h.opp}</span><span class="histmeta">${h.lvl}</span><span class="pts" style="margin-left:auto;">${h.pts}</span></div>`).join('')
-    : '<div class="histmeta" style="padding:6px 2px;">No matches yet — start one and make history.</div>';
-}
-function toggleCol(id){
-  const c=$(id); c.classList.toggle('open');
-  c.querySelector('.collapse-head').setAttribute('aria-expanded', c.classList.contains('open'));
-}
-function buildLobby(){
-  $('levels').innerHTML=''; $('cats').innerHTML='';
-  LEVELS.forEach(l=>{
-    const b=document.createElement('button'); b.className='chip'+(l===state.level?' sel':''); b.textContent=l;
-    b.onclick=()=>{state.level=l; [...$('levels').children].forEach(c=>c.classList.remove('sel')); b.classList.add('sel');
-      $('cur-level').textContent=l; $('col-level').classList.remove('open');};
-    $('levels').appendChild(b);
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
   });
-  CATS.forEach(c=>{
-    const b=document.createElement('button'); b.className='chip coralsel'+(c===state.cat?' sel':''); b.textContent=c;
-    b.onclick=()=>{state.cat=c; [...$('cats').children].forEach(x=>x.classList.remove('sel')); b.classList.add('sel');
-      $('cur-cat').textContent=c; $('col-cat').classList.remove('open');};
-    $('cats').appendChild(b);
-  });
-  renderPlayers();
-  renderHistory();
-  FRIENDS.filter(f=>f.online && !f.joined).forEach((f,i)=>
-    setTimeout(()=>{f.joined=true; renderPlayers(); toast(`${f.n} joined the hive`);}, 1000*(i+1)));
-}
-function renderPlayers(){
-  const pl=$('playerlist'); pl.innerHTML='';
-  const me=document.createElement('div'); me.className='player you';
-  me.innerHTML=`<span class="avatar">${state.name[0].toUpperCase()}</span>${state.name} (you)<span class="status on"><span class="pdot on"></span>Online · Host</span>`;
-  pl.appendChild(me);
-  FRIENDS.forEach(f=>{
-    const d=document.createElement('div');
-    if(f.joined){
-      d.className='player';
-      d.innerHTML=`<span class="avatar">${f.a}</span>${f.n}<span class="status on"><span class="pdot on"></span>Online · Ready</span>`;
-    } else if(f.online){
-      d.className='player';
-      d.innerHTML=`<span class="avatar">${f.a}</span>${f.n}<span class="status on"><span class="pdot on"></span>Online · joining…</span>`;
-    } else {
-      d.className='player off'; d.setAttribute('role','button'); d.tabIndex=0;
-      d.setAttribute('aria-label',`${f.n} is offline. Activate to send a game invite.`);
-      d.innerHTML=`<span class="avatar">${f.a}</span>${f.n}<span class="status off"><span class="pdot off"></span>${f.invited?'Invite sent ✓':'Offline · tap to invite'}</span>`;
-      const act=()=>invite(f); d.onclick=act;
-      d.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault(); act();}};
-    }
-    pl.appendChild(d);
-  });
-  updateStart();
-}
-function invite(f){
-  if(f.invited) return;
-  f.invited=true; renderPlayers();
-  toast(`Invite sent to ${f.n} 🐝 — they're signed up, so they'll get a push`);
-  setTimeout(()=>{ f.online=true; f.joined=true; renderPlayers(); toast(`${f.n} accepted your invite and joined!`); }, 4200);
-}
-function toast(msg){
-  const t=$('toast'); t.textContent=msg; t.classList.add('show');
-  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2500);
-}
-function updateStart(){
-  const joined=FRIENDS.filter(f=>f.joined).length;
-  $('btn-start').disabled = joined<1;
-  $('btn-start').textContent = joined>=1 ? `Start match (${joined+1} players)` : 'Waiting for players…';
-}
-$('btn-start').addEventListener('click',async ()=>{
-  const gi=LEVELS.indexOf(state.level);
-  state.botAcc = gi<=7 ? .8 : gi<=12 ? .6 : gi<=14 ? .45 : .3;
-  state.opponents=FRIENDS.filter(f=>f.joined);
-  state.words=await pickMatchWords(state.level, ROUNDS);
-  state.scores={}; [state.name,...state.opponents.map(b=>b.n)].forEach(n=>state.scores[n]=0);
-  state.round=0; startRound();
-});
+}, { threshold: 0.12 });
 
-/* ------- game round ------- */
-function startRound(){
-  state.submitted=false; state.timeLeft=TIME; state.botDone={};
-  const w=state.words[state.round];
-  $('round-pill').textContent=`Round ${state.round+1} of ${ROUNDS}`;
-  $('level-pill').textContent=`${state.level} · ${state.cat.replace('All Categories','All')}`;
-  $('hinttext').textContent='Tap the speaker, then spell what you hear.';
-  $('f-spell').value=''; $('tiles').innerHTML='';
-  $('btn-submit').disabled=false;
-  renderOpps(); show('s-game');
-  setTimeout(()=>speak(w.w),400);
-  clearInterval(state.timer);
-  state.timer=setInterval(tick,1000); drawRing();
-  state.opponents.forEach(b=>{ const t=3000+Math.random()*(TIME-8)*1000;
-    setTimeout(()=>{ if(state.round<ROUNDS && !state.botDone[b.n]){state.botDone[b.n]={t:TIME-state.timeLeft, ok:Math.random()<state.botAcc}; renderOpps();}},t);
-  });
-}
-function tick(){
-  state.timeLeft--; drawRing();
-  if(state.timeLeft<=0){clearInterval(state.timer); resolveRound(null,TIME);}
-}
-function drawRing(){
-  $('timer-num').textContent=state.timeLeft;
-  const frac=state.timeLeft/TIME;
-  $('ringfg').style.strokeDashoffset=301.6*(1-frac);
-  $('ringfg').style.stroke = frac<.25 ? 'var(--coral)' : 'var(--turq)';
-}
-function renderOpps(){
-  $('opp-status').innerHTML=state.opponents.map(b=>`<span class="opp ${state.botDone&&state.botDone[b.n]?'done':''}">${b.n} ${state.botDone&&state.botDone[b.n]?'✓ submitted':'…spelling'}</span>`).join('');
-}
-$('f-spell').addEventListener('input',e=>{
-  $('tiles').innerHTML=[...e.target.value.trim()].map(ch=>`<span class="tile">${ch}</span>`).join('');
+document.querySelectorAll('.about-text').forEach(el => { el.classList.add('slide-left'); observer.observe(el); });
+document.querySelectorAll('.about-details').forEach(el => { el.classList.add('slide-right'); observer.observe(el); });
+document.querySelectorAll('.section-label').forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
+document.querySelectorAll('.section-title').forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
+document.querySelectorAll('.timeline-entry').forEach((el, i) => {
+  el.classList.add('slide-left', 'stagger-' + Math.min(i + 1, 5));
+  observer.observe(el);
 });
-$('f-spell').addEventListener('keydown',e=>{if(e.key==='Enter')$('btn-submit').click();});
-$('btn-speak').addEventListener('click',()=>speak(state.words[state.round].w));
-$('btn-def').addEventListener('click',()=>{$('hinttext').textContent='Definition: '+state.words[state.round].d;});
-$('btn-sent').addEventListener('click',()=>{
-  const w=state.words[state.round];
-  const masked=w.s.replace(new RegExp(w.w,'ig'),'‸____‸');
-  $('hinttext').textContent='🔊 “'+masked+'”';
-  speak(w.s);
+document.querySelectorAll('.project-card').forEach((el, i) => {
+  el.classList.add('scale-in', 'stagger-' + Math.min(i + 1, 5));
+  observer.observe(el);
 });
-$('btn-submit').addEventListener('click',()=>{
-  if(state.submitted)return; state.submitted=true; $('btn-submit').disabled=true;
-  clearInterval(state.timer);
-  resolveRound($('f-spell').value.trim(), TIME-state.timeLeft);
+document.querySelectorAll('.skill-group').forEach((el, i) => {
+  el.classList.add('fade-up', 'stagger-' + Math.min(i + 1, 5));
+  observer.observe(el);
 });
-
-/* ------- reveal ------- */
-function resolveRound(answer, myTime){
-  speechSynthesis.cancel();
-  const w=state.words[state.round];
-  const meOk = answer!==null && answer.toLowerCase()===w.w.toLowerCase();
-  const results=[{n:state.name, ok:meOk, t:myTime, sub:answer===null?'(no answer)':answer}];
-  state.opponents.forEach(b=>{ const d=state.botDone[b.n]||{t:TIME,ok:false};
-    results.push({n:b.n, ok:d.ok, t:d.t, sub:d.ok?w.w:scramble(w.w)});
-  });
-  const correct=results.filter(r=>r.ok);
-  const fastest=correct.length?correct.reduce((a,b)=>a.t<b.t?a:b).n:null;
-  results.forEach(r=>{ r.pts=(r.ok?100:0)+(r.n===fastest?25:0); state.scores[r.n]+=r.pts; });
-  $('reveal-pill').textContent=`Round ${state.round+1} of ${ROUNDS}`;
-  $('reveal-lvl').textContent=state.level;
-  $('reveal-word').textContent=w.w;
-  $('reveal-verdict').textContent = meOk ? (state.name===fastest?'✓ Correct — fastest bee! +125':'✓ Correct! +100') : '✗ Not quite — 0 points';
-  $('reveal-verdict').className='verdict '+(meOk?'good':'bad');
-  $('reveal-scores').innerHTML = results.sort((a,b)=>state.scores[b.n]-state.scores[a.n]).map(r=>
-    `<div class="scorerow ${r.n===state.name?'me':''}"><span>${r.n}</span><span class="subm ${r.ok?'':'wrong'}">${r.sub}</span><span class="delta">+${r.pts}</span><span class="pts">${state.scores[r.n]}</span></div>`).join('');
-  $('btn-next').textContent = state.round+1>=ROUNDS ? 'See final results' : 'Next word';
-  show('s-reveal');
-}
-function scramble(w){ const a=[...w]; const i=1+Math.floor(Math.random()*(a.length-2)); [a[i],a[i+1]]=[a[i+1],a[i]]; return a.join(''); }
-$('btn-next').addEventListener('click',()=>{
-  state.round++;
-  if(state.round>=ROUNDS) showResults(); else startRound();
+document.querySelectorAll('.edu-card').forEach((el, i) => {
+  el.classList.add(i % 2 === 0 ? 'slide-left' : 'slide-right', 'stagger-' + (i + 1));
+  observer.observe(el);
 });
-
-/* ------- results ------- */
-function showResults(){
-  const rows=Object.entries(state.scores).sort((a,b)=>b[1]-a[1]);
-  const winner=rows[0][0];
-  const oppCount=state.opponents.length;
-  const topOpp=rows.find(([n])=>n!==state.name)[0];
-  HISTORY.push({r:winner===state.name?'W':'L', lvl:state.level, opp:topOpp+(oppCount>1?` +${oppCount-1}`:''), pts:state.scores[state.name]});
-  renderHistory();
-  $('final-title').textContent = winner===state.name ? `You win, ${state.name}!` : `${winner} takes the hive!`;
-  $('final-sub').textContent = `${state.level} · ${state.cat} · ${ROUNDS} rounds`;
-  $('final-scores').innerHTML = rows.map(([n,p],i)=>
-    `<div class="scorerow ${i===0?'winner':''} ${n===state.name?'me':''}"><span>${i+1}. ${n}</span><span class="pts">${p} pts</span></div>`).join('');
-  show('s-results');
-}
-$('btn-rematch').addEventListener('click',()=>{$('btn-start').click();});
-$('btn-newmatch').addEventListener('click',()=>{buildLobby(); show('s-lobby');});
+document.querySelectorAll('.beyond-item').forEach((el, i) => {
+  el.classList.add('scale-in', 'stagger-' + Math.min(i + 1, 5));
+  observer.observe(el);
+});
+document.querySelectorAll('.contact-section .section-title, .contact-text, .contact-links').forEach((el, i) => {
+  el.classList.add('fade-up', 'stagger-' + (i + 1));
+  observer.observe(el);
+});
+document.querySelectorAll('.early-career, .certs-section, .beyond-content').forEach(el => {
+  el.classList.add('fade-up'); observer.observe(el);
+});
+document.querySelectorAll('.volunteer-card').forEach((el, i) => {
+  el.classList.add('scale-in', 'stagger-' + Math.min(i + 1, 5));
+  observer.observe(el);
+});
+document.querySelectorAll('.side-project-card').forEach(el => {
+  el.classList.add('scale-in'); observer.observe(el);
+});
 </script>
 </body>
 </html>
