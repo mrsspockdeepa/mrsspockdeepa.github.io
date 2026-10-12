@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jen Deepa | Product Leader</title>
+<meta name="theme-color" content="#d4849a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
@@ -239,6 +244,40 @@ section { padding: 100px 32px; }
   letter-spacing: 0.1em; color: var(--accent); margin-bottom: 4px;
 }
 .project-section-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; }
+.project-section-text ul, .project-desc > ul { list-style: none; margin: 0; padding: 0; }
+.project-section-text li, .project-desc > ul > li { position: relative; padding-left: 20px; margin-bottom: 6px; }
+.project-section-text li::before, .project-desc > ul > li::before {
+  content: ''; position: absolute; left: 4px; top: 0.7em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+/* ---- CASE STUDIES ---- */
+#case-studies { border-top: 1px solid var(--border); }
+.case-intro { color: var(--text-muted); max-width: 640px; margin-bottom: 36px; font-size: 1.02rem; }
+.case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: start; }
+.case-card { padding: 28px; }
+.case-card summary { display: block; list-style: none; cursor: pointer; }
+.case-card summary::-webkit-details-marker { display: none; }
+.case-card summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 8px; border-radius: 6px; }
+.case-card summary > span:not(.case-toggle) { display: block; }
+.case-summary { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 8px; }
+.case-card summary .case-toggle {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 0;
+  font-size: 0.85rem; font-weight: 600; letter-spacing: 0.03em; color: var(--accent);
+}
+.case-toggle svg { width: 14px; height: 14px; transition: transform 0.25s; }
+.case-card[open] .case-toggle svg { transform: rotate(180deg); }
+.case-toggle-open { display: none; }
+.case-card[open] .case-toggle-open { display: inline; }
+.case-card[open] .case-toggle-closed { display: none; }
+.case-body { margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--border); }
+.case-card[open] .case-body { animation: fadeIn 0.3s ease; }
+.case-card .project-desc { margin-bottom: 8px; }
+.case-card .btn { margin-top: 16px; }
+@media (prefers-reduced-motion: reduce) {
+  .case-card[open] .case-body { animation: none; }
+  .case-toggle svg { transition: none; }
+}
+@media (max-width: 1000px) { .case-grid { grid-template-columns: 1fr; } }
 .project-metrics { display: flex; gap: 32px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid var(--border); }
 .metric-value { font-family: var(--serif); font-size: 1.5rem; color: var(--accent); }
 .metric-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
@@ -338,16 +377,39 @@ footer {
 }
 
 /* ---- RESPONSIVE ---- */
+@media (min-width: 769px) and (max-width: 1000px) {
+  .nav-inner { padding: 16px 24px; }
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.02em; white-space: nowrap; }
+}
 @media (max-width: 768px) {
   section { padding: 72px 20px; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .nav-inner {
-    padding: 14px 20px;
-    flex-direction: column; gap: 8px; align-items: center;
+    padding: 10px 20px 4px;
+    flex-direction: column; gap: 2px; align-items: center;
   }
   .nav-logo { text-align: center; }
-  .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
-  .nav-links a { font-size: 0.75rem; }
-  .hero { padding-top: 100px; padding-bottom: 40px; }
+  .nav-links {
+    gap: 18px; flex-wrap: nowrap; width: 100%;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    justify-content: flex-start; justify-content: safe center;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links li { flex: 0 0 auto; }
+  .nav-links a { display: block; font-size: 0.75rem; padding: 10px 0; white-space: nowrap; }
+  .hero { padding-top: 104px; padding-bottom: 40px; }
+  .contact-section { padding: 80px 20px; }
+  .timeline { padding-left: 28px; }
+  .timeline-dot { left: -28px; }
+  .timeline-company { font-size: 1.2rem; }
+  .timeline-header { gap: 2px 12px; }
+  .project-card { padding: 24px 20px; }
+  .project-name { font-size: 1.15rem; line-height: 1.3; }
+  .project-subtitle { margin-bottom: 14px; }
+  .project-section-text, .project-desc { line-height: 1.65; }
+  .project-section-text li, .project-desc > ul > li { margin-bottom: 8px; }
   .hero h1 { font-size: 2.2rem; }
   .hero-meta { flex-direction: column; gap: 20px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -355,7 +417,9 @@ footer {
   .edu-grid { grid-template-columns: 1fr; }
   .beyond-highlights { grid-template-columns: 1fr; }
   .volunteer-grid { grid-template-columns: 1fr; }
-  .project-metrics { flex-direction: column; gap: 16px; }
+  .project-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+  .metric-value { font-size: 1.3rem; }
+  .metric-label { font-size: 0.7rem; }
   .section-title { font-size: 2rem; }
 
   .fade-up, .slide-left, .slide-right, .scale-in {
@@ -376,9 +440,15 @@ footer {
   }
 }
 @media (max-width: 480px) {
-  .nav-links { gap: 10px; }
+  .nav-links {
+    gap: 14px; padding-right: 32px;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
+  }
   .nav-links a { font-size: 0.7rem; }
   .hero h1 { font-size: 1.8rem; }
+  .beyond-content ul { columns: 1; }
+  .beyond-content p, .beyond-content ul { font-size: 1rem; }
   .beyond-highlights { grid-template-columns: 1fr; }
   .hero-ctas { flex-direction: column; align-items: stretch; }
   .hero-ctas .btn { width: 100%; justify-content: center; }
@@ -515,6 +585,7 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#volunteering">Community</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -611,15 +682,27 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
         <div class="project-desc">
           <div class="project-section">
             <div class="project-section-label">Challenge</div>
-            <div class="project-section-text">International travelers were forced to call in or visit the airport to verify travel documents, creating friction, increasing operational costs, and driving poor NPS.</div>
+            <div class="project-section-text"><ul>
+              <li>International travelers had to call in or visit the airport to verify travel documents</li>
+              <li>Created friction, increased operational costs, and drove poor NPS</li>
+            </ul></div>
           </div>
           <div class="project-section">
             <div class="project-section-label">Approach</div>
-            <div class="project-section-text">Led the 0-to-1 product initiative integrating Jumio's identity verification API with IATA's Timatic regulatory database. Scoped all edge cases including 207 passport nationalities, minors, and traveling with pets. Designed a phased rollout via Optimizely across pilot routes, with comprehensive GTM, RACI, and success metrics.</div>
+            <div class="project-section-text"><ul>
+              <li>Led the 0-to-1 product initiative integrating Jumio's identity verification API with IATA's Timatic regulatory database</li>
+              <li>Scoped all edge cases, including 207 passport nationalities, minors, and traveling with pets</li>
+              <li>Designed a phased rollout via Optimizely across pilot routes</li>
+              <li>Owned comprehensive GTM, RACI, and success metrics</li>
+            </ul></div>
           </div>
           <div class="project-section">
             <div class="project-section-label">Outcome</div>
-            <div class="project-section-text">Delivered a fully self-service document verification experience completing in under two minutes across iOS, Android, and Web, serving both Alaska and Hawaiian Airlines brands.</div>
+            <div class="project-section-text"><ul>
+              <li>Delivered a fully self-service document verification experience completing in under two minutes</li>
+              <li>Live across iOS, Android, and Web</li>
+              <li>Serves both Alaska and Hawaiian Airlines brands</li>
+            </ul></div>
           </div>
         </div>
         <div class="project-metrics">
@@ -636,20 +719,37 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
         <div class="project-desc">
           <div class="project-section">
             <div class="project-section-label">Challenge</div>
-            <div class="project-section-text">Alaska's check-in platform ran on aging legacy architecture with low digital adoption and limited e-commerce capability.</div>
+            <div class="project-section-text"><ul>
+              <li>Aging legacy architecture with low digital adoption and limited e-commerce capability</li>
+              <li>Clunky 7-page check-in process for guests</li>
+              <li>A failure in any one backend service could break the entire flow</li>
+            </ul></div>
           </div>
           <div class="project-section">
             <div class="project-section-label">Approach</div>
-            <div class="project-section-text">Led the end-to-end modernization, building a comprehensive roadmap, creating a testing process that balanced revenue upsell goals with customer satisfaction, and establishing data-driven feedback loops to continuously optimize conversion. Led the Boarding Pass Redesign by conducting competitive analysis and prioritizing the details travelers need most: gate changes, seat assignments, boarding times, flight delays, TSA PreCheck, loyalty status, and document verification status.</div>
+            <div class="project-section-text"><ul>
+              <li>Led the end-to-end modernization, retiring legacy check-in so Alaska had more control over its backend services</li>
+              <li>Implemented a modular architecture so that if the bags or seats services fail, check-in does not fail</li>
+              <li>Built a comprehensive roadmap and a testing process that balanced revenue upsell goals with customer satisfaction</li>
+              <li>Established data-driven feedback loops to continuously optimize conversion</li>
+              <li>Led the Boarding Pass Redesign through competitive analysis, prioritizing the details travelers need most: gate changes, seat assignments, boarding times, flight delays, TSA PreCheck, loyalty status, and document verification status</li>
+            </ul></div>
           </div>
           <div class="project-section">
             <div class="project-section-label">Outcome</div>
-            <div class="project-section-text">Drove 87% digital self-service adoption while generating $2M/month in new ancillary revenue from bags and seat upgrades. Delivered an in-house boarding pass generator with digital wallet integration, replacing third-party dependencies and giving e-commerce full control over the traveler experience.</div>
+            <div class="project-section-text"><ul>
+              <li>Replaced the clunky 7-page process with a single page and 3 clicks, with no dip in revenue</li>
+              <li>Drove 87% digital self-service adoption</li>
+              <li>Generated $2M/month in new ancillary revenue from bags and seat upgrades</li>
+              <li>Delivered an in-house boarding pass generator with digital wallet integration, replacing third-party dependencies and giving e-commerce full control over the traveler experience</li>
+            </ul></div>
           </div>
         </div>
         <div class="project-metrics">
           <div><div class="metric-value">87%</div><div class="metric-label">Digital self-service adoption</div></div>
           <div><div class="metric-value">$2M/mo</div><div class="metric-label">New e-commerce revenue</div></div>
+          <div><div class="metric-value">7 pages &rarr; 1</div><div class="metric-label">Streamlined check-in flow</div></div>
+          <div><div class="metric-value">3 clicks</div><div class="metric-label">To complete check-in</div></div>
           <div><div class="metric-value">3 mo</div><div class="metric-label">MVP delivery</div></div>
         </div>
       </div>
@@ -658,7 +758,12 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
         <div class="project-name">Carrier Connect Marketplace</div>
         <div class="project-subtitle">Alaska Airlines &amp; Oneworld Partners</div>
         <div class="project-desc">
-          Co-led the development of a marketplace platform enabling cross-app discovery for Alaska and Oneworld alliance partners. Defined the value proposition, platform scalability requirements, and integration architecture to create new customer acquisition channels and seamless partner check-in experiences, ensuring that Alaska travelers connecting to Oneworld partners could check in to both segments from the Alaska app and vice versa.
+          <ul>
+            <li>Co-led development of a marketplace platform enabling cross-app discovery for Alaska and Oneworld alliance partners</li>
+            <li>Defined the value proposition, platform scalability requirements, and integration architecture</li>
+            <li>Created new customer acquisition channels</li>
+            <li>Enabled seamless partner check-in: Alaska travelers connecting to Oneworld partners can check in to both segments from the Alaska app, and vice versa</li>
+          </ul>
         </div>
         <div class="project-metrics">
           <div><div class="metric-value">Multi-airline</div><div class="metric-label">Cross-alliance integration</div></div>
@@ -690,6 +795,8 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
           <ul>
             <li>Built 0-to-1 Document Verification (Jumio + Timatic) covering 207 passport nationalities, minors, and edge cases; delivered self-service completion in under 2 minutes across iOS, Android, and Web</li>
             <li>Drove 87% digital self-service adoption and $2M/month in new e-commerce revenue by modernizing check-in, retiring legacy architecture, and expanding ancillary upsell (bags, seat upgrades, priority boarding)</li>
+            <li>Retired legacy check-in and collapsed a clunky 7-page process into a single page and 3 clicks with no dip in revenue</li>
+            <li>Implemented a modular architecture so a bags or seats service failure does not fail check-in</li>
             <li>Delivered check-in MVP within 3 months of hire; authored multi-year international platform strategy with comprehensive GTM and testing plans</li>
             <li>Co-led Carrier Connect marketplace for Alaska + Oneworld partners, defining value proposition and creating new cross-app discovery and customer acquisition channels</li>
             <li>Accelerated delivery velocity with agentic AI workflows automating PRD and creative brief generation; improved conversion through A/B testing and data-driven feedback loops</li>
@@ -788,6 +895,93 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="case-studies" style="background: var(--bg-elevated);">
+  <div class="container">
+    <div class="section-label">Case studies</div>
+    <h2 class="section-title">How I <em>think.</em></h2>
+    <p class="case-intro">Independent product case studies. Each is a proposal built on hypotheses rather than delivered results, and none is affiliated with the company it covers.</p>
+    <div class="case-grid">
+
+      <details class="project-card case-card">
+        <summary>
+          <span class="project-name">Discovery &amp; Recommendations</span>
+          <span class="project-subtitle">ezCater &middot; Senior PM case study</span>
+          <span class="case-summary">How to help busy workplace buyers find the right caterer fast, without recommending one that can't fulfill the order.</span>
+          <span class="case-toggle"><span class="case-toggle-closed">View details</span><span class="case-toggle-open">Hide details</span><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l5 5 5-5"/></svg></span>
+        </summary>
+        <div class="case-body">
+        <div class="project-desc">
+          <ul>
+            <li>Infer first: pre-fill from past orders and ask only the questions that change results</li>
+            <li>Three-step engine: filter for fulfillment, rank for a smooth order, balance proven picks with exploration</li>
+            <li>Primary metric: discovery sessions that end in an on-time, issue-free order</li>
+            <li>Three-phase roadmap with a worked 50/50 experiment</li>
+          </ul>
+        </div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Discovery</span>
+          <span class="timeline-tag">Recommendations</span>
+          <span class="timeline-tag">Experimentation</span>
+        </div>
+        <a href="https://mrsspockdeepa.github.io/ezcater/" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Read the ezCater Discovery and Recommendations case study">Read case study &rarr;</a>
+        </div>
+      </details>
+
+      <details class="project-card case-card">
+        <summary>
+          <span class="project-name">Revenue Recognition, Unbundled</span>
+          <span class="project-subtitle">Recurly &middot; Standalone RevRec service</span>
+          <span class="case-summary">A proposal to sell RevRec as a standalone revenue subledger for B2B contract businesses, even without Recurly billing.</span>
+          <span class="case-toggle"><span class="case-toggle-closed">View details</span><span class="case-toggle-open">Hide details</span><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l5 5 5-5"/></svg></span>
+        </summary>
+        <div class="case-body">
+        <div class="project-desc">
+          <ul>
+            <li>Wedge: treat contract changes like seat changes, pauses, and cancellations as lifecycle events</li>
+            <li>Validation: 20 buyer and 3 auditor interviews with a week-6 go/no-go gate</li>
+            <li>Pricing: platform fee plus basis points on recognized revenue, tested with Van Westendorp and conjoint studies</li>
+            <li>AI flags missed changes for human review while the engine does the math</li>
+          </ul>
+        </div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Platform Strategy</span>
+          <span class="timeline-tag">Pricing</span>
+          <span class="timeline-tag">Go-to-Market</span>
+        </div>
+        <a href="https://mrsspockdeepa.github.io/recurly/" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Read the Recurly Revenue Recognition, Unbundled case study">Read case study &rarr;</a>
+        </div>
+      </details>
+
+      <details class="project-card case-card">
+        <summary>
+          <span class="project-name">Type 2 Patient Discovery</span>
+          <span class="project-subtitle">Dexcom Stelo &middot; Retention discovery plan</span>
+          <span class="case-summary">A discovery plan to understand a suspected retention cliff around month 12 for Stelo, an over-the-counter continuous glucose monitor.</span>
+          <span class="case-toggle"><span class="case-toggle-closed">View details</span><span class="case-toggle-open">Hide details</span><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l5 5 5-5"/></svg></span>
+        </summary>
+        <div class="case-body">
+        <div class="project-desc">
+          <ul>
+            <li>Verify the cliff first, including whether churn is really graduation to prescription Dexcom G7</li>
+            <li>Map the patient journey and test seven hypotheses, including GLP-1 impact and wear friction</li>
+            <li>Six-month plan of weekly interviews by a PM, design, and engineering trio</li>
+            <li>Clinical guardrails such as time-in-range can veto priorities</li>
+          </ul>
+        </div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Product Discovery</span>
+          <span class="timeline-tag">Healthcare</span>
+          <span class="timeline-tag">Retention</span>
+        </div>
+        <a href="https://mrsspockdeepa.github.io/dexcomtype2/" target="_blank" rel="noopener" class="btn btn-secondary" aria-label="Read the Dexcom Type 2 Patient Discovery case study">Read case study &rarr;</a>
+        </div>
+      </details>
+
+    </div>
   </div>
 </section>
 
@@ -913,6 +1107,7 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
         <li>Competitive family board games</li>
         <li>Hiking</li>
         <li>Acting lessons</li>
+        <li>Voice acting</li>
         <li>Improv</li>
         <li>Learning guitar</li>
         <li>Avid reading</li>
