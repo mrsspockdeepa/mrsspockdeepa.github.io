@@ -350,6 +350,10 @@ section { padding: 100px 32px; }
 .side-project-tagline { font-size: 1.05rem; color: var(--accent); font-weight: 500; margin-bottom: 18px; }
 .side-project-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 20px; }
 .side-project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.side-project-diagram { margin: 24px 0 0; }
+.side-project-diagram a { display: block; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: #fff; }
+.side-project-diagram img { display: block; width: 100%; height: auto; }
+.side-project-diagram figcaption { font-size: 0.8rem; color: var(--text-muted); margin-top: 8px; }
 
 /* ---- VOLUNTEERING ---- */
 .volunteer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -994,13 +998,21 @@ nav { opacity: 0; animation: fadeIn 0.6s ease 1.1s forwards; }
       <div class="side-project-status"><span class="status-dot"></span> In development</div>
       <div class="side-project-name">Property Management Platform</div>
       <div class="side-project-tagline">A B2B app with two connected experiences: one for landlords, one for tenants.</div>
-      <div class="side-project-desc">Building a B2B property management platform that serves both sides of the rental relationship. Landlords and property managers get a portfolio view with automated workflows and action-only alerts, while tenants get a simple, self-serve experience for everyday requests and communication. I'm leading product end to end, from requirements and PRD through prototype.</div>
+      <div class="side-project-desc">Building a B2B property management platform that serves both sides of the rental relationship. Landlords and property managers get a portfolio view with automated workflows and action-only alerts, while tenants get a simple, self-serve experience for everyday requests and communication. I'm leading product end to end, from requirements and PRD through prototype, and I've drafted the pricing strategy for the platform.</div>
       <div class="side-project-tags">
         <span class="timeline-tag">B2B SaaS</span>
         <span class="timeline-tag">Two-Sided Experience</span>
         <span class="timeline-tag">Property Management</span>
+        <span class="timeline-tag">Pricing Strategy</span>
+        <span class="timeline-tag">User Flows</span>
         <span class="timeline-tag">0-to-1 Product</span>
       </div>
+      <figure class="side-project-diagram">
+        <a href="assets/rental-management-journey.png" target="_blank" rel="noopener">
+          <img src="assets/rental-management-journey.png" alt="User flow diagram of the rental management journey: vacancy and listing, tours, applicant screening, deposit, lease signing, then active tenancy with rent collection, maintenance, and renewal paths" loading="lazy">
+        </a>
+        <figcaption>User flow: the rental management journey, from vacancy to active tenancy. Click to enlarge.</figcaption>
+      </figure>
     </div>
     <div class="side-project-card" style="margin-top: 32px;">
       <div class="side-project-status"><span class="status-dot"></span> In development</div>
